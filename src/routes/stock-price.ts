@@ -1,9 +1,7 @@
-import express from 'express';
+import { Router } from 'express';
 import cors from 'cors';
 import yahooFinance from 'yahoo-finance2';
 
-const app = express();
-const PORT = 5000;
 const SYMBOLS = ['IBM', 'AAPL', 'GOOGL', 'MSFT']; // Exemplo de símbolos válidos
 
 interface Acao {
@@ -11,9 +9,11 @@ interface Acao {
   nome: string;
 }
 
-app.use(cors());
+const stockPriceRouter = Router();
 
-app.get('/api/stock-price', async (req, res) => {
+stockPriceRouter.use(cors());
+
+stockPriceRouter.get('/stock-price', async (req, res) => {
   try {
     // Usa Promise.all para buscar todos os dados das ações
     const acoes = await Promise.all(SYMBOLS.map(async (symbol) => {
@@ -41,6 +41,4 @@ app.get('/api/stock-price', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+export { stockPriceRouter };
