@@ -5,7 +5,8 @@ import  { useState } from 'react';
 
 const RegisterButton = () => {
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const [CPF, setCPF] = useState('');
+    const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
@@ -19,7 +20,7 @@ const RegisterButton = () => {
         setLoading(true); // Ativa o estado de carregamento
 
         try {
-            var result = await authService.registerUser(name, email, password);
+            var result = await authService.registerUser(name, CPF, login, password);
             if(result.success){
                 setMessage('Registro bem-sucedido! Você pode agora fazer login.');
                 setTimeout(() => {
@@ -52,12 +53,22 @@ const RegisterButton = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="email">E-mail</label>
+                    <label htmlFor="CPF">CPF</label>
                     <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        type="CPF"
+                        id="CPF"
+                        value={CPF}
+                        onChange={(e) => setCPF(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="email">Login</label>
+                    <input
+                        type="login"
+                        id="login"
+                        value={login}
+                        onChange={(e) => setLogin(e.target.value)}
                         required
                     />
                 </div>
