@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './ComprarPage.css';
 import Acao from '../../models/Acao';
+import acoesService from '../../services/AcoesService';
 
 const acoesMock = [
     { nome: 'Ação 1', valor: 150.00, quantidade: 1 },
@@ -19,17 +20,9 @@ function ComprarPage() {
     const [selectedAcao, setSelectedAcao] = useState(null);
     const [quantity, setQuantity] = useState(1);
 
-    useEffect(() => {
-        const acoes = acoesMock.map(acao => new Acao(
-            acao.nome,
-            '', // code
-            acao.valor,
-            '', // type
-            '', // name
-            0,  // averagePurchagePrice
-            acao.quantidade,  // quantity
-            []  // transactions
-        ));
+    useEffect(async () => {
+        const acoes = await acoesService.getAcoes();
+            
         setAcoes(acoes);
     }, []);
 
@@ -56,8 +49,9 @@ function ComprarPage() {
                 {acoes.map((acao, index) => (
                     <div className="card" key={index}>
                         <h2>{acao.nome}</h2>
-                        <p>Valor R$: {acao.currentValue.toFixed(2)}</p>
-                        <p>Quantidade: {acao.quantity}</p>
+                        <p>Valor R$: {acao.price}</p>
+                        <p>Nome: {acao.name} </p>
+                        <p>Código: {acao.stock}</p>
                         <button 
                             className="buy-button" 
                             onClick={() => handleBuy(acao)}
