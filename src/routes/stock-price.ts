@@ -9,11 +9,11 @@ interface Acao {
   nome: string;
 }
 
-const stockPriceRouter = Router();
+const stockPriceRoutes = Router();
 
-stockPriceRouter.use(cors());
+stockPriceRoutes.use(cors());
 
-stockPriceRouter.get('/stock-price', async (req, res) => {
+stockPriceRoutes.get('/stock-price', async (req, res) => {
   try {
     // Usa Promise.all para buscar todos os dados das ações
     const acoes = await Promise.all(SYMBOLS.map(async (symbol) => {
@@ -41,4 +41,4 @@ stockPriceRouter.get('/stock-price', async (req, res) => {
   }
 });
 
-export { stockPriceRouter };
+export { stockPriceRoutes };
