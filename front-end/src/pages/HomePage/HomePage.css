@@ -1,0 +1,237 @@
+/* src/pages/HomePage/HomePage.css */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333; /* Cor de fundo da navbar */
+    padding: 10px 20px; /* Padding aumentado */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 20px;
+}
+
+.nav-links a {
+    color: white; /* Cor do texto na navbar */
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.user-icon {
+    position: relative;
+    cursor: pointer;
+    margin-right: 30px; /* Margem à direita */
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background-color: white; /* Cor de fundo branca */
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 150px;
+}
+
+.dropdown-menu p {
+    margin: 0;
+    padding: 10px 0;
+    font-weight: bold;
+    color: #333; /* Cor do texto escuro */
+}
+
+.dropdown-menu a {
+    color: #333; /* Cor do texto escuro */
+    text-decoration: none;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+    border-radius: 5px;
+}
+
+.content {
+    margin-top: 20px; /* Espaço entre o topo da página e o container de investimento */
+    padding: 0 10px; /* Padding lateral reduzido */
+    background-color: transparent; /* Remove o fundo branco grande */
+}
+
+.investimento-container {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px; /* Padding interno */
+    margin-bottom: 20px; /* Espaço entre a seção de investimento e os cartões */
+    width: 100%; /* Ajusta a largura para ocupar todo o espaço disponível */
+    box-sizing: border-box; /* Inclui padding e border na largura total */
+    background-color: #ebf1f3; /* Cor de fundo branca para o contêiner específico */
+}
+
+.total-investido-container, .carteira-container {
+    border-bottom: 2px solid #ddd; /* Linha cinza clara separando as seções */
+    padding-bottom: 10px; /* Espaço interno inferior */
+    margin-bottom: 10px; /* Espaço entre os blocos */
+}
+
+.total-investido-title, .carteira-title {
+    font-size: 1.5rem;
+    margin-bottom: 5px; /* Espaço abaixo do título */
+}
+
+.total-investido-value, .carteira-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.actions-container {
+    display: flex;
+    justify-content: center; /* Centraliza os botões */
+    gap: 20px; /* Espaçamento entre os botões */
+    margin-top: 20px; /* Espaço entre o conteúdo de investimento e os botões */
+}
+
+.action-button {
+    display: flex;
+    align-items: center; /* Alinha o ícone e o texto verticalmente */
+    background-color: #f9f9f9; /* Cor de fundo dos botões */
+    border: 1px solid #ddd; /* Borda cinza clara */
+    border-radius: 25px; /* Bordas arredondadas */
+    padding: 10px 15px; /* Padding interno */
+    text-decoration: none;
+    color: #333; /* Cor do texto */
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 120px; /* Largura fixa dos botões */
+    justify-content: center; /* Centraliza o conteúdo */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Efeito de transição */
+    margin-top: 20px;
+}
+
+.action-button:hover {
+    background-color: #e0e0e0; /* Cor de fundo ao passar o mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.action-button span {
+    margin-left: 8px; /* Espaço entre o ícone e o texto */
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px; /* Limita a largura máxima do modal */
+    box-sizing: border-box; /* Inclui padding e border na largura total */
+    text-align: center;
+    position: relative; /* Necessário para o botão de fechar ser posicionado corretamente */
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.modal-content input {
+    width: calc(100% - 22px); /* Ajusta a largura para considerar padding e border */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Inclui padding e border na largura total */
+}
+
+.modal-button {
+    background: #7aef82;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif; /* Aplicar a fonte escolhida */ 
+}
+
+.modal-button:hover {
+    background-color: #11fd5c;
+}
+
+.modal-content .modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: -170px;
+    background: transparent;
+    border: none;
+    font-size: 1.2rem; /* Diminui o tamanho da fonte */
+    padding: 5px; /* Ajustei o padding */
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close-button:hover {
+    color: #007bff;
+}
+
+.cancel-button {
+    background-color: #fb7070; /* Vermelho */
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #cc0000; /* Vermelho mais escuro ao passar o mouse */
+}
+
+.deposit-button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px; /* Certifique-se de que o tamanho da fonte seja o mesmo */
+    background-color: #f9f9f9; /* Mantém o mesmo estilo dos outros botões */
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 10px 15px;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 120px;
+    justify-content: center;
+    font-weight: 400; /* Define o peso da fonte como normal */
+
+}

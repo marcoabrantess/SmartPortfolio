@@ -5,11 +5,16 @@ const authService = {
         try {
             const data = await authRepository.authenticateUser(email, password);    
             localStorage.setItem('access_token', data.access_token);
+            localStorage.setItem('user', data);
             return data;
         } catch (error) {
             console.error('Erro no authService:', error);
             throw error;
         }
+    },
+
+    getUser: () => {
+        return localStorage.getItem('user');
     },
 
     logout: () => {
