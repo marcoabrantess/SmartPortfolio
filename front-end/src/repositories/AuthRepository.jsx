@@ -25,14 +25,14 @@ const authRepository = {
         }
     },
 
-    registerUser: async (name, email, password) => {    
+    registerUser: async (name, CPF, login, password) => {    
         try {
-             const response = await fetch(`${API_BASE_URL}/register`, {
+             const response = await fetch(`${API_BASE_URL}/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, email, password }),
+                body: JSON.stringify({ name, CPF, login, password }),
             });
 
             

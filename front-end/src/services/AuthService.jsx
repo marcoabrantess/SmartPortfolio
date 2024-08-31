@@ -30,9 +30,9 @@ const authService = {
     //     return new Promise((resolve));
     // }
 
-    registerUser: async (name, email, password) => {    
+    registerUser: async (name, CPF, login, password) => {    
         try {
-            return await authRepository.registerUser(name, email, password);
+            return await authRepository.registerUser(name, CPF, login, password);
         } catch (error) {
             console.error('Erro no authService:', error);
             throw error;
