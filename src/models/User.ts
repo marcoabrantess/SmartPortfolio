@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToOne, JoinColumn } from 'typeorm';
 import { v4 as uuid } from "uuid";
+import { Portfolio } from './Portfolio';
 
 // import * as bcrypt from 'bcryptjs';
 
@@ -22,6 +23,10 @@ export class User {
 
     @CreateDateColumn()
     created_at!: Date;
+
+    @OneToOne(() => Portfolio, portfolio => portfolio.user)
+    @JoinColumn()
+    portfolio!: Portfolio;
 
     // Hook to hash the password before inserting it into the database
     // @BeforeInsert()

@@ -23,5 +23,6 @@ export const AppDataSource = new DataSource({
   password: TYPEORM_PASSWORD,
   database: TYPEORM_DATABASE,
   entities: [__dirname + '/models/*.ts'], // Ajuste o caminho das entidades
+  subscribers: [__dirname + '/subscribers/*.ts'],
   migrations: [TYPEORM_MIGRATIONS],
 });

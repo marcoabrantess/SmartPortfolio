@@ -1,12 +1,15 @@
 import authRepository from "../repositories/AuthRepository";
 
 const authService = {
-    login: async (email, password) => {
+    login: async (login, password) => {
         try {
-            const data = await authRepository.authenticateUser(email, password);    
-            localStorage.setItem('access_token', data.access_token);
-            localStorage.setItem('user', data);
-            return data;
+            const data = await authRepository.authenticateUser(login, password);    
+            const {token, name} = data;
+
+            localStorage.setItem('access_token', token);
+            localStorage.setItem('user', name);
+            
+            return data.success;
         } catch (error) {
             console.error('Erro no authService:', error);
             throw error;

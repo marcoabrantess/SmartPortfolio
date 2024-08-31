@@ -23,9 +23,10 @@ const Navbar = ({ children }) => {
     };
 
     useEffect(() => {
-        const user = authService.getUser(); // Obtém o nome do usuário
+        const name = authService.getUser(); // Obtém o nome do usuário
         //const cartUser = acoesService.getTotalCarteira();
-        setUserName(user);
+
+        setUserName(name);
         //setTotalCarteira(cartUser);
     }, []);
 

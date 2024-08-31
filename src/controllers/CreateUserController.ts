@@ -13,6 +13,6 @@ export class CreateUserController {
             return response.status(400).json(result.message)
         }
         
-        return response.json(result);
+        return response.status(201).json({ success: true, message: 'User created successfully!', user: result });
     }
 }

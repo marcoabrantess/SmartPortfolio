@@ -4,7 +4,7 @@ import './LoginForm.css';
 import  { useState } from 'react';
 
 const LoginForm = () => {
-    const [email, setEmail] = useState('');
+    const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [sucessMessage, setsucessMessage] = useState('');    
@@ -13,7 +13,7 @@ const LoginForm = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            await authService.login(email, password);
+            await authService.login(login, password);
             setsucessMessage('Login bem sucedido! Redirecionando para a página inicial...');
             setTimeout(() => {
                 navigate('/home');
@@ -30,13 +30,13 @@ const LoginForm = () => {
             <h2>Login</h2>
             <form onSubmit={handleLogin}>
                 <div className="form-group">
-                    <label htmlFor="email">E-mail:</label>
+                    <label htmlFor="login">Login:</label>
                     <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        type="login"
+                        id="login"
+                        name="login"
+                        value={login}
+                        onChange={(e) => setLogin(e.target.value)}
                         required
                     />
                 </div>
