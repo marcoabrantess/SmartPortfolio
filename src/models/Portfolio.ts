@@ -1,26 +1,22 @@
-import { Entity, PrimaryGeneratedColumn, OneToOne, OneToMany } from 'typeorm';
-import { v4 as uuid } from "uuid";
-
-import { User } from './User';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Entity, PrimaryGeneratedColumn, OneToOne, OneToMany, Column, JoinColumn } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 import { Asset } from './Asset';
-import { Transaction } from './Transaction';
+// import { Transaction } from './Transaction';
 
-@Entity()
+@Entity('portfolios')
 export class Portfolio {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id!: string;
 
-    @OneToOne(() => User, user => user.portfolio)
-    user!: User;
-
-    @OneToMany(() => Asset, asset => asset.portfolio)
+    @OneToMany(() => Asset, (asset) => asset.portfolio) // Estabelece a relação com Asset
     assets!: Asset[];
 
-    @OneToMany(() => Transaction, transaction => transaction.portfolio)
-    transactions!: Transaction[];
+    // @OneToMany(() => Transaction, transaction => transaction.portfolio)
+    // transactions!: Transaction[];
 
     constructor() {
-        if(!this.id) {
+        if (!this.id) {
             this.id = uuid();
         }
     }

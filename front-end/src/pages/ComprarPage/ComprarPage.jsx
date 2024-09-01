@@ -1,18 +1,6 @@
 import { useEffect, useState } from 'react';
 import './ComprarPage.css';
-import Acao from '../../models/Acao';
 import acoesService from '../../services/AcoesService';
-
-const acoesMock = [
-    { nome: 'Ação 1', valor: 150.00, quantidade: 1 },
-    { nome: 'Ação 2', valor: 200.00, quantidade: 15 },
-    { nome: 'Ação 3', valor: 250.00, quantidade: 23 },
-    { nome: 'Ação 4', valor: 300.00, quantidade: 30 },
-    { nome: 'Ação 5', valor: 350.00, quantidade: 5 },
-    { nome: 'Ação 6', valor: 400.00, quantidade: 12 },
-    { nome: 'Ação 7', valor: 450.00, quantidade: 8 },
-    { nome: 'Ação 8', valor: 500.00, quantidade: 20 }
-];
 
 function ComprarPage() {
     const [acoes, setAcoes] = useState([]);
@@ -20,10 +8,15 @@ function ComprarPage() {
     const [selectedAcao, setSelectedAcao] = useState(null);
     const [quantity, setQuantity] = useState(1);
 
-    useEffect(async () => {
-        const acoes = await acoesService.getAcoes();
-            
-        setAcoes(acoes);
+    useEffect(() => {
+        async function fetchAcoes() {
+            const response = await acoesService.getAcoes();
+
+            // Ajuste o código para acessar o array correto
+            setAcoes(response.acoes || []);
+        }
+        
+        fetchAcoes();
     }, []);
 
     const handleBuy = (acao) => {
@@ -37,9 +30,17 @@ function ComprarPage() {
         setQuantity(1);
     };
 
-    const handlePurchase = () => {
-        console.log(`Compra realizada: ${selectedAcao.nome}, Quantidade: ${quantity}`);
-        closeModal();
+    const handlePurchase = async () => {
+        if (!selectedAcao) return;
+
+        try {
+            await acoesService.comprarAcao(selectedAcao, quantity);
+            console.log(`Compra realizada: ${selectedAcao.nome}, Quantidade: ${quantity}`);
+            closeModal();
+        } catch (error) {
+            console.error('Erro ao comprar ação:', error);
+            setError('Erro ao realizar a compra. Tente novamente.');
+        }
     };
 
     return (
@@ -51,7 +52,7 @@ function ComprarPage() {
                         <h2>{acao.nome}</h2>
                         <p>Valor R$: {acao.price}</p>
                         <p>Nome: {acao.name} </p>
-                        <p>Código: {acao.stock}</p>
+                        <p>Código: {acao.symbol}</p>
                         <button 
                             className="buy-button" 
                             onClick={() => handleBuy(acao)}

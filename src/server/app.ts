@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
-import { stockPriceRoutes } from '../routes/stock-price';
+import { stockPriceRoutes } from '../routes/assets';
 import { userRoutes } from '../routes/user';
 import { authRoutes } from '../routes/auth';
 

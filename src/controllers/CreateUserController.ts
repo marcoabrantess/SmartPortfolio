@@ -10,7 +10,7 @@ export class CreateUserController {
         const result = await service.execute({ name, CPF, login, password });
 
         if(result instanceof Error) {
-            return response.status(400).json(result.message)
+            return response.status(400).json(result.message);
         }
         
         return response.status(201).json({ success: true, message: 'User created successfully!', user: result });

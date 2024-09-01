@@ -1,31 +1,32 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { v4 as uuid } from "uuid";
 
 import { Portfolio } from './Portfolio';
-import { Transaction } from './Transaction';
+// import { Transaction } from './Transaction';
 
-@Entity()
+@Entity('assets')
 export class Asset {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id!: string;
 
-    @Column()
+    @Column({ type: 'varchar' })
     code!: string;
 
-    @Column('decimal')
+    @Column({ type: 'decimal' })
     currentValue!: number;
 
-    @Column()
+    @Column({ type: 'varchar' })
     name!: string;
 
-    @Column('decimal')
+    @Column({ type: 'decimal' })
     yield!: number;
 
-    @ManyToOne(() => Portfolio, portfolio => portfolio.assets)
-    portfolio!: Portfolio;
+    @Column({ type: 'integer' })
+    quantity!: number;
 
-    @OneToMany(() => Transaction, transaction => transaction.asset)
-    transactions!: Transaction[];
+    @ManyToOne(() => Portfolio, (portfolio) => portfolio.assets)
+    portfolio!: Portfolio;
 
     constructor() {
         if(!this.id) {

@@ -2,8 +2,6 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToOne, Joi
 import { v4 as uuid } from "uuid";
 import { Portfolio } from './Portfolio';
 
-// import * as bcrypt from 'bcryptjs';
-
 @Entity('users')
 export class User {
     @PrimaryGeneratedColumn('uuid')
@@ -21,21 +19,18 @@ export class User {
     @Column({ type: 'varchar' })
     password!: string;
 
+    @Column({ type: 'uuid'})
+    portfolio_id: string | undefined ;
+
     @CreateDateColumn()
     created_at!: Date;
 
-    @OneToOne(() => Portfolio, portfolio => portfolio.user)
-    @JoinColumn()
+    @OneToOne(() => Portfolio, { cascade: true, eager: true })
+    @JoinColumn({ name: 'portfolio_id' })
     portfolio!: Portfolio;
 
-    // Hook to hash the password before inserting it into the database
-    // @BeforeInsert()
-    // async hashPassword() {
-    //     this.password = await bcrypt.hash(this.password, 10);
-    // }
-
     constructor() {
-        if(!this.id) {
+        if (!this.id) {
             this.id = uuid();
         }
     }

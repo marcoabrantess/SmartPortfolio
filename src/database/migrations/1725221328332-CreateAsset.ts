@@ -1,11 +1,10 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
-export class CreateTransaction1725124848772 implements MigrationInterface {
-
+export class CreateAsset1725221328332 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "transactions",
+                name: "assets",
                 columns: [
                     {
                         name: "id",
@@ -13,38 +12,50 @@ export class CreateTransaction1725124848772 implements MigrationInterface {
                         isPrimary: true
                     },
                     {
-                        name: "amount",
-                        type: "integer",
-                        isNullable: false
-                    },
-                    {
-                        name: "type",
+                        name: "code",
                         type: "varchar",
                         isNullable: false
                     },
                     {
-                        name: "price",
+                        name: "current_value",
                         type: "decimal",
                         precision: 10,
                         scale: 2,
                         isNullable: false
                     },
                     {
-                        name: "date",
-                        type: "date",
+                        name: "name",
+                        type: "varchar",
+                        isNullable: false
+                    },
+                    {
+                        name: "yield",
+                        type: "decimal",
+                        precision: 5,
+                        scale: 2,
+                        isNullable: false
+                    },
+                    {
+                        name: "quantity",
+                        type: "integer",
                         isNullable: false
                     },
                     {
                         name: "portfolio_id",
                         type: "uuid",
-                        isNullable: false
+                        isNullable: true
+                    },
+                    {
+                        name: "created_at",
+                        type: "timestamp",
+                        default: "now()"
                     }
                 ]
             })
         );
 
         await queryRunner.createForeignKey(
-            "transactions",
+            "assets",
             new TableForeignKey({
                 columnNames: ["portfolio_id"],
                 referencedTableName: "portfolios",
@@ -52,10 +63,11 @@ export class CreateTransaction1725124848772 implements MigrationInterface {
                 onDelete: "CASCADE"
             })
         );
+    
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropForeignKey("transactions", "FK_TRANSACTIONS_PORTFOLIO");
-        await queryRunner.dropTable("transactions");
+        await queryRunner.dropForeignKey("assets", "FK_ASSETS_PORTFOLIO");
+        await queryRunner.dropTable("assets");
     }
 }
