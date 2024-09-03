@@ -15,15 +15,4 @@ export class PurchaseAssetController {
             res.status(500).json({ error: 'Erro ao comprar ações' });
         }
     }
-    // static async comprarAcao(req: Request, res: Response) {
-    //     const { userId, assetId, quantity } = req.body;
-
-    //     try {
-    //         await CreateAssetService.execute({ userId, assetId, quantity });
-    //         res.status(200).json({ message: 'Ação comprada com sucesso' });
-    //     } catch (error) {
-    //         console.error('Erro ao comprar ação:', error.message);
-    //         res.status(500).json({ error: error.message });
-    //     }
-    // }
 }

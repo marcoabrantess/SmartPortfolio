@@ -10,7 +10,8 @@ const userRepository = AppDataSource.getRepository(User);
 
 type login = {
     token: string,
-    name: string
+    name: string,
+    userId: string
 }
 
 export class AuthService {
@@ -33,7 +34,8 @@ export class AuthService {
 
         const token = jwt.sign({ login: user.login }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
         const name = user.name;
-        console.log(name)
-        return { token, name };
+        const userId = user.id;
+
+        return { token, name, userId };
     }
 }

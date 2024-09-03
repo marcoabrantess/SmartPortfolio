@@ -26,7 +26,7 @@ export class CreateAssetService {
         const portfolioRepository = AppDataSource.getRepository(Portfolio);
 
         const user = await userRepository.findOne({
-            where: { name: userId },
+            where: { id: userId },
             relations: ['portfolio']
         });
 
@@ -43,8 +43,6 @@ export class CreateAssetService {
             throw new Error('Portfólio não encontrado');
         }
 
-        console.log(assetInRepository)
-
         // Verificar se a ação já está no portfólio
         let assetInPortfolio = assetInRepository? assetInRepository.find(asset => asset.portfolio_id === portfolio.id) : null;
 
@@ -60,12 +58,10 @@ export class CreateAssetService {
             assetInPortfolio.name = asset.name;
             assetInPortfolio.yield = 0;
             assetInPortfolio.quantity = quantity;
-            assetInPortfolio.portfolio = portfolio;
-
-            assetRepository.save(assetInPortfolio)
-
-            // portfolio.assets.push(assetInPortfolio);
+            assetInPortfolio.portfolio = portfolio;            
         }
+
+        assetRepository.save(assetInPortfolio)
 
         // Salvar o portfólio atualizado
         await portfolioRepository.save(portfolio);
