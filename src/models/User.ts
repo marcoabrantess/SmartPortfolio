@@ -42,4 +42,19 @@ export class User {
             this.id = uuid();
         }
     }
+
+    // Método para calcular o valor total investido
+    async getTotalInvestedValue(): Promise<number> {
+        if (!this.portfolio) {
+            throw new Error('Portfolio não encontrado');
+        }
+
+        // Calcula o valor total investido
+        const assets = this.portfolio.assets;
+        const totalInvested = assets.reduce((total, asset) => {
+            return total + (asset.currentValue * asset.quantity);
+        }, 0);
+
+        return parseFloat(totalInvested.toFixed(2));
+    }
 }
