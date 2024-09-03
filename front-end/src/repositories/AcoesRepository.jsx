@@ -80,10 +80,12 @@ const acoesRepository = {
 
   getAcoesByUserId: async (userId) => {
     try {
-      const response = await axios.get(`/api/acoes/${userId}`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`, // Pega o token do localStorage
-        },
+      const response = await fetch(`${API_BASE_URL}/minhas-acoes`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userId }),
       });
       return response.data;
     }

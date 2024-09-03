@@ -33,12 +33,9 @@ export class CreateAssetService {
         if (!user) {
             throw new Error('Usuário não encontrado');
         }
+        
+        const assetInRepository = await assetRepository.find({where: { code: asset.symbol }});
 
-        const assetInRepository = await assetRepository.findOne({where: { code: asset.symbol }});
-
-        if (!assetInRepository) {
-            throw new Error('Ação não encontrada');
-        }
 
         const portfolio = user.portfolio;
 
@@ -46,8 +43,10 @@ export class CreateAssetService {
             throw new Error('Portfólio não encontrado');
         }
 
+        console.log(assetInRepository)
+
         // Verificar se a ação já está no portfólio
-        let assetInPortfolio = portfolio.assets.find(a => a.id === assetInRepository.id);
+        let assetInPortfolio = assetInRepository? assetInRepository.find(asset => asset.portfolio_id === portfolio.id) : null;
 
         if (assetInPortfolio) {
             // Atualize a quantidade da ação existente
@@ -63,7 +62,9 @@ export class CreateAssetService {
             assetInPortfolio.quantity = quantity;
             assetInPortfolio.portfolio = portfolio;
 
-            portfolio.assets.push(assetInPortfolio);
+            assetRepository.save(assetInPortfolio)
+
+            // portfolio.assets.push(assetInPortfolio);
         }
 
         // Salvar o portfólio atualizado
