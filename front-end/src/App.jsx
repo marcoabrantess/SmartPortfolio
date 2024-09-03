@@ -4,6 +4,7 @@ import RegisterPage from './pages/RegisterPage/RegisterPage';
 import HomePage from './pages/HomePage/HomePage';
 import ComprarPage from './pages/ComprarPage/ComprarPage';
 import Navbar from './components/Navbar/Navbar';
+import VenderPage from './pages/VenderPage/VenderPage';
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -20,6 +21,8 @@ const AppRoutes = () => {
         <Route path="/home" element={<HomePage />} />
         <Route path="/comprar" element={<ComprarPage />} />
         <Route path="/" element={<LoginPage />} />
+        <Route path="/vender" element={<VenderPage />} />
+
       </Routes>
     </>
   );
