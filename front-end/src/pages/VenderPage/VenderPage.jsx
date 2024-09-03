@@ -51,7 +51,9 @@ function VenderPage() {
         
        try{
             const userId = authService.getUserId();
-            const result = await acoesService.venderAcao(selectedAcao, quantity, userId);
+            const priceId = selectedAcao.price;
+            const assetId = selectedAcao.id;
+            const result = await acoesService.venderAcao(priceId, assetId, quantity, userId);
 
             if(result.success){
                 setLoading(false); // Para o spinner

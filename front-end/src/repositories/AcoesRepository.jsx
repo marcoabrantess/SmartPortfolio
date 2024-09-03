@@ -44,14 +44,14 @@ const acoesRepository = {
     }
   },
 
-  venderAcao: async (asset, quantity, userId) => {
+  venderAcao: async (priceId, assetId, quantity, userId) => {
     try {
       const response = await fetch(`${API_BASE_URL}/vender-acao`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ asset, quantity, userId }),
+          body: JSON.stringify({ priceId, assetId, quantity, userId }),
       });
       if (!response.ok) {
           throw new Error('Erro na venda da ação');

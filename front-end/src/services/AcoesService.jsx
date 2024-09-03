@@ -21,9 +21,9 @@ const acoesService = {
     }
   },
 
-  venderAcao: async (asset, quantity, userId) => {
+  venderAcao: async (priceId, assetId, quantity, userId) => {
     try {
-      const result = await acoesRepository.venderAcao(asset, quantity, userId);
+      const result = await acoesRepository.venderAcao(priceId, assetId, quantity, userId);
       return result;
     } catch (error) {
       console.error('Erro no acoesService:', error);
@@ -43,13 +43,19 @@ const acoesService = {
   },
 
   getAcoesByUserId: async (userId) => {
-    try{
-      const response = await acoesRepository.getAcoesByUserId(userId);
-      return response;
+    try {
+      const response = await fetch(`${API_BASE_URL}/minhas-acoes`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          params: userId
+      });
+      return await response.json();
     }
-    catch(error){
-      console.error('Erro no acoesService:', error);
-      throw error
+    catch (error) {
+      console.error('Erro no acoesRepository:', error);
+      throw error;
     }
   }
 }
