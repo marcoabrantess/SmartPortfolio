@@ -41,7 +41,7 @@ function ComprarPage() {
         if (!selectedAcao) return;
 
        try{
-            const userId = authService.getUser();
+            const userId = authService.getUserId();
             const result = await acoesService.comprarAcao(selectedAcao, quantity, userId);
 
             if(result.success){

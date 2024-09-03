@@ -14,7 +14,7 @@ function VenderPage() {
 
 
     useEffect(() => {
-        const loggedUser = authService.getUser();
+        const loggedUser = authService.getUserId();
         async function fetchAcoes() {
             const response = await acoesService.getAcoesByUserId(loggedUser);
             setAcoes(response.acoes || []);
@@ -49,7 +49,7 @@ function VenderPage() {
         }
         
        try{
-            const userId = authService.getUser();
+            const userId = authService.getUserId();
             const result = await acoesService.venderAcao(selectedAcao, quantity, userId);
 
             if(result.success){

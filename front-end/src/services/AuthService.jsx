@@ -4,10 +4,11 @@ const authService = {
     login: async (login, password) => {
         try {
             const data = await authRepository.authenticateUser(login, password);    
-            const {token, name} = data;
+            const {token, name, userId} = data;
 
             localStorage.setItem('access_token', token);
             localStorage.setItem('user', name);
+            localStorage.setItem('userId', userId);
             
             return data.success;
         } catch (error) {
@@ -18,6 +19,10 @@ const authService = {
 
     getUser: () => {
         return localStorage.getItem('user');
+    },
+
+    getUserId: () => {
+        return localStorage.getItem('userId');
     },
 
     logout: () => {
