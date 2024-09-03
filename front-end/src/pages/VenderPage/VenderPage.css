@@ -1,0 +1,163 @@
+/* ComprarPage.css */
+
+/* Estilo para o contêiner da página de compra */
+.compra-page {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+/* Estilo para o título */
+.compra-page h1 {
+    font-size: 1.2rem; /* Ajuste o tamanho da fonte conforme necessário */
+    text-align: center;
+    margin-bottom: 20px; /* Adiciona um espaçamento abaixo do título */
+}
+
+/* Contêiner dos cards */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-left: 20px; /* Adiciona um padding à esquerda para mover os cards para a direita */
+}
+
+/* Estilo para cada card */
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 250px; /* Ajuste conforme necessário */
+    text-align: center;
+    position: relative;
+}
+
+/* Estilo para o botão de compra */
+.buy-button {
+    background-color: #f6ad4d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 3px 8px; /* Reduz o padding para um tamanho menor */
+    cursor: pointer;
+    font-size: 12px; /* Reduz o tamanho da fonte */
+    font-family: 'Poppins', sans-serif; /* Aplicar a fonte escolhida */
+    margin-top: 10px; /* Espaço acima do botão para separação */
+    text-align: center; /* Alinha o texto ao centro */
+    display: inline-block; /* Faz o botão ajustar-se ao tamanho do conteúdo */
+}
+
+.buy-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para o overlay do modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+}
+
+/* Estilo para o conteúdo do modal */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px; /* Limita a largura máxima do modal */
+    box-sizing: border-box; /* Inclui padding e border na largura total */
+    text-align: center;
+    position: relative; /* Necessário para o botão de fechar ser posicionado corretamente */
+}
+
+/* Estilo para o título no modal */
+.modal-content h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+/* Estilo para o input no modal */
+.modal-content input {
+    width: calc(100% - 22px); /* Ajusta a largura para considerar padding e border */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Inclui padding e border na largura total */
+}
+
+/* Estilo para os botões no modal */
+.modal-button {
+    background: #7aef82;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif; /* Aplicar a fonte escolhida */ 
+}
+
+.modal-button:hover {
+    background-color: #11fd5c;
+}
+
+/* Estilo para o botão de fechar no modal */
+.modal-content .modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Ajustado para a posição correta */
+    background: transparent;
+    border: none;
+    font-size: 1.2rem; /* Diminui o tamanho da fonte */
+    padding: 5px; /* Ajustei o padding */
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close-button:hover {
+    color: #007bff;
+}
+
+/* Estilo para o botão cancelar no modal */
+.cancel-button {
+    background-color: #fb7070; /* Vermelho */
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #cc0000; /* Vermelho mais escuro ao passar o mouse */
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #22c55e;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Mensagem de sucesso */
+.success-message {
+    color: #22c55e;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
