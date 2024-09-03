@@ -39,7 +39,7 @@ function ComprarPage() {
             closeModal();
         } catch (error) {
             console.error('Erro ao comprar ação:', error);
-            setError('Erro ao realizar a compra. Tente novamente.');
+            //setError('Erro ao realizar a compra. Tente novamente.');
         }
     };
 
@@ -49,7 +49,7 @@ function ComprarPage() {
             <div className="cards-container">
                 {acoes.map((acao, index) => (
                     <div className="card" key={index}>
-                        <h2>{acao.nome}</h2>
+                        <h2>{acao.name}</h2>
                         <p>Valor R$: {acao.price}</p>
                         <p>Nome: {acao.name} </p>
                         <p>Código: {acao.symbol}</p>
@@ -66,8 +66,8 @@ function ComprarPage() {
                 <div className="modal-overlay">
                     <div className="modal-content">
                         <button className="modal-close-button" onClick={closeModal}>×</button>
-                        <h2>Comprar {selectedAcao.nome}</h2>
-                        <p>Valor unitário: R${selectedAcao.currentValue.toFixed(2)}</p>
+                        <h2>Comprar {selectedAcao.symbol}</h2>
+                        <p>Valor unitário: R${selectedAcao.price.toFixed(2)}</p>
                         <input 
                             type="number" 
                             value={quantity} 

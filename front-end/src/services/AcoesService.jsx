@@ -12,13 +12,13 @@ const acoesService = {
   },
 
   comprarAcao: async (acao, quantity) => {
-    try {
-      await acoesRepository.comprarAcao();
-      return acoes;
-    } catch (error) {
-      console.error('Erro no acoesService:', error);
-      throw error;
-    }
+    // try {
+    //   await acoesRepository.comprarAcao();
+    //   return acoes;
+    // } catch (error) {
+    //   console.error('Erro no acoesService:', error);
+    //   throw error;
+    // }
     
 },
 

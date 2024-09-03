@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
 import { CreateAssetService } from '../services/CreateAssetService';
-import { GetAssetBySymbolService } from '../services/GetAssetBySymbolService';
+import { GetAssetService } from '../services/GetAssetService';
 
 export class AcoesController {
     async handle(req: Request, res: Response) {
         try {
-            const { symbol, quantity, price, currentValue, yeld } = req.body;
+            const { userId, symbol, quantity, price } = req.body;
 
-            const existingAsset = new GetAssetBySymbolService(symbol);
-            if(existingAsset) {
-                UpdateAsset
-            }
+            const createAssetService = new CreateAssetService();
+            // createAssetService.execute()
+
+
         } catch(error) {
             console.error('Erro ao comprar ações:', error);
             res.status(500).json({ error: 'Erro ao comprar ações' });

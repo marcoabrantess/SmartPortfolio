@@ -25,7 +25,7 @@ const acoesRepository = {
     }
   },
 
-  comprarAcao: async () => {
+  comprarAcao: async (acao, quantity) => {
     try {
       const response = await fetch(`${API_BASE_URL}/comprar-acao`, {
           method: 'POST',
