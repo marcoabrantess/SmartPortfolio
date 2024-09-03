@@ -1,6 +1,5 @@
 import { AppDataSource } from '../data-source';
 import { Asset } from '../models/Asset';
-import { Portfolio } from '../models/Portfolio';
 import { User } from '../models/User';
 
 type AssetRequest = {
@@ -23,7 +22,6 @@ export class CreateAssetService {
 
         const userRepository = AppDataSource.getRepository(User);
         const assetRepository = AppDataSource.getRepository(Asset);
-        const portfolioRepository = AppDataSource.getRepository(Portfolio);
 
         const user = await userRepository.findOne({
             where: { id: userId },
@@ -50,6 +48,12 @@ export class CreateAssetService {
             // Atualize a quantidade da ação existente
             assetInPortfolio.currentValue = asset.price;
             assetInPortfolio.quantity += quantity;
+
+            if(user.available_balance >= (asset.price * quantity)) {
+                user.available_balance = user.available_balance - (asset.price * quantity)
+            } else {
+                throw "saldo insuficiente"
+            }
         } else {
             // Adicionar nova ação ao portfólio
             assetInPortfolio = new Asset();
@@ -61,9 +65,8 @@ export class CreateAssetService {
             assetInPortfolio.portfolio = portfolio;            
         }
 
-        assetRepository.save(assetInPortfolio)
+        await userRepository.save(user)
 
-        // Salvar o portfólio atualizado
-        await portfolioRepository.save(portfolio);
+        await assetRepository.save(assetInPortfolio)
     }
 }

@@ -51,9 +51,9 @@ function VenderPage() {
         
        try{
             const userId = authService.getUserId();
-            const priceId = selectedAcao.price;
+            const price = selectedAcao.price;
             const assetId = selectedAcao.id;
-            const result = await acoesService.venderAcao(priceId, assetId, quantity, userId);
+            const result = await acoesService.venderAcao(price, assetId, quantity, userId);
 
             if(result.success){
                 selectedAcao.quantity -= quantity;
