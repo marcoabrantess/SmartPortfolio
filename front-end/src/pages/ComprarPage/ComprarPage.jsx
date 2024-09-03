@@ -22,18 +22,8 @@ function ComprarPage() {
 
     const handleBuy = (acao) => {
         setSelectedAcao(acao);
-        try{
-            const userId = authService.getUser();
-            const result = acoesService.comprarAcao(acao, quantity, userId);
-
-            if(result.success){
-                console.log('Compra realizada com sucesso!');
-                closeModal();
-            }
-        }
-        catch(error){
-            console.error('Erro ao comprar ação:', error);
-        }
+        setModalOpen(true);
+        handlePurchase(acao);
     };
 
     const closeModal = () => {
@@ -45,13 +35,17 @@ function ComprarPage() {
     const handlePurchase = async () => {
         if (!selectedAcao) return;
 
-        try {
-            await acoesService.comprarAcao(selectedAcao, quantity);
-            console.log(`Compra realizada: ${selectedAcao.nome}, Quantidade: ${quantity}`);
-            closeModal();
-        } catch (error) {
+       try{
+            const userId = authService.getUser();
+            const result = acoesService.comprarAcao(acao, quantity, userId);
+
+            if(result.success){
+                console.log('Compra realizada com sucesso!');
+                closeModal();
+            }
+        }
+        catch(error){
             console.error('Erro ao comprar ação:', error);
-            //setError('Erro ao realizar a compra. Tente novamente.');
         }
     };
 
