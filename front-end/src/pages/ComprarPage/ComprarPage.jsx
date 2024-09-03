@@ -8,6 +8,8 @@ function ComprarPage() {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedAcao, setSelectedAcao] = useState(null);
     const [quantity, setQuantity] = useState(1);
+    const [loading, setLoading] = useState(false); // Estado para controlar o spinner
+    const [success, setSuccess] = useState(false); // Estado para controlar o ícone de sucesso
 
     useEffect(() => {
         async function fetchAcoes() {
@@ -30,6 +32,8 @@ function ComprarPage() {
         setModalOpen(false);
         setSelectedAcao(null);
         setQuantity(1);
+        setLoading(false); // Reseta o spinner ao fechar o modal
+        setSuccess(false); // Reseta o ícone de sucesso ao fechar o modal
     };
 
     const handlePurchase = async () => {
@@ -41,8 +45,11 @@ function ComprarPage() {
             const result = acoesService.comprarAcao(selectedAcao, quantity, userId);
 
             if(result.success){
-                console.log('Compra realizada com sucesso!');
-                closeModal();
+                setLoading(false); // Para o spinner
+                setSuccess(true); // Mostra o ícone de sucesso
+                setTimeout(() => {
+                    closeModal(); // Fecha o modal após o intervalo
+                }, 2000); // Intervalo de 2 segundos
             }
         }
         catch(error){
@@ -82,8 +89,14 @@ function ComprarPage() {
                             min="1"
                             placeholder="Quantidade" 
                         />
-                        <button onClick={handlePurchase} className="modal-button">Confirmar</button>
-                        <button onClick={closeModal} className="modal-button cancel-button">Cancelar</button>
+                         <button onClick={handlePurchase} className="modal-button" disabled={loading}>
+                            {loading ? "Carregando..." : "Confirmar"} {/* Botão desabilitado durante o carregamento */}
+                        </button>
+                        <button onClick={closeModal} className="modal-button cancel-button" disabled={loading}>
+                            Cancelar
+                        </button>
+                        {loading && <div className="spinner"></div>} {/* Exibe o spinner durante o carregamento */}
+                        {success && <div className="success-icon">✔</div>} {/* Exibe o ícone de sucesso após a compra */}
                     </div>
                 </div>
             )}
