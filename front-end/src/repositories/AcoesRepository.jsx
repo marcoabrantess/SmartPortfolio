@@ -25,14 +25,14 @@ const acoesRepository = {
     }
   },
 
-  comprarAcao: async (acao, quantity) => {
+  comprarAcao: async (acao, quantity, userId) => {
     try {
       const response = await fetch(`${API_BASE_URL}/comprar-acao`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ acao, quantity }),
+          body: JSON.stringify({ acao, quantity, userId }),
       });
       if (!response.ok) {
           throw new Error('Erro na compra da ação');

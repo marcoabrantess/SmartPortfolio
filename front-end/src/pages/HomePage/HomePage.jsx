@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
 import { FaDollarSign, FaPlus, FaFilter } from 'react-icons/fa'; // Ícones adicionados
+import DepositoService from '../../services/DepositoService';
 
 function HomePage() {
     const [modalOpen, setModalOpen] = useState(false); // Estado para o modal
@@ -19,10 +20,15 @@ function HomePage() {
         setDepositAmount(''); // Limpa o valor do depósito ao fechar
     };
 
-    const handleDeposit = () => {
-        console.log('Depósito realizado:', depositAmount);
-        closeModal(); 
+    const handleDeposit = async () => {
+        try{
+            await DepositoService.depositar(depositAmount);
+            closeModal(); 
+        }
+        catch(error){
+           console.log(error);
     };
+}
   
     return (
         <div className="homepage">

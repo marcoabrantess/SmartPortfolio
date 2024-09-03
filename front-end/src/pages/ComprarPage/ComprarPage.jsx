@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './ComprarPage.css';
 import acoesService from '../../services/AcoesService';
+import authService from '../../services/AuthService';
 
 function ComprarPage() {
     const [acoes, setAcoes] = useState([]);
@@ -21,7 +22,18 @@ function ComprarPage() {
 
     const handleBuy = (acao) => {
         setSelectedAcao(acao);
-        setModalOpen(true);
+        try{
+            const userId = authService.getUser();
+            const result = acoesService.comprarAcao(acao, quantity, userId);
+
+            if(result.success){
+                console.log('Compra realizada com sucesso!');
+                closeModal();
+            }
+        }
+        catch(error){
+            console.error('Erro ao comprar ação:', error);
+        }
     };
 
     const closeModal = () => {
