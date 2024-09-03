@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
 import { CreateAssetService } from '../services/CreateAssetService';
-import { GetAssetService } from '../services/GetAssetService';
 
-export class AcoesController {
+export class PurchaseAssetController {
     async handle(req: Request, res: Response) {
         try {
-            const { userId, symbol, quantity, price } = req.body;
+            
+            const { asset, quantity, userId } = req.body;
 
             const createAssetService = new CreateAssetService();
-            // createAssetService.execute()
+            createAssetService.execute({asset, quantity, userId})
 
 
         } catch(error) {

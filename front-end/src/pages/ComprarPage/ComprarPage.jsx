@@ -25,6 +25,10 @@ function ComprarPage() {
     const handleBuy = (acao) => {
         setSelectedAcao(acao);
         setModalOpen(true);
+<<<<<<< HEAD
+        // handlePurchase(acao);
+=======
+>>>>>>> 45edbd707241c96debbdb3ce7bd5dfa701aff9f8
     };
 
     const closeModal = () => {
@@ -36,11 +40,16 @@ function ComprarPage() {
     };
 
     const handlePurchase = async () => {
+        console.log(selectedAcao)
         if (!selectedAcao) return;
 
        try{
             const userId = authService.getUser();
+<<<<<<< HEAD
+            const result = acoesService.comprarAcao(selectedAcao, quantity, userId);
+=======
             const result = acoesService.comprarAcao(asset, quantity, userId);
+>>>>>>> 45edbd707241c96debbdb3ce7bd5dfa701aff9f8
 
             if(result.success){
                 setLoading(false); // Para o spinner

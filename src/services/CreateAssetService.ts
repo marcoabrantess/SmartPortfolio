@@ -3,15 +3,21 @@ import { Asset } from '../models/Asset';
 import { Portfolio } from '../models/Portfolio';
 import { User } from '../models/User';
 
+type AssetRequest = {
+    name: string,
+    price: number,
+    symbol: string
+}
+
 interface CreateAssetParams {
     userId: string;
-    assetId: string;
+    asset: AssetRequest;
     quantity: number;
 }
 
 export class CreateAssetService {
-    static async execute({ userId, assetId, quantity }: CreateAssetParams): Promise<void> {
-        if (!userId || !assetId || !quantity) {
+    async execute({ asset, quantity, userId }: CreateAssetParams): Promise<void> {
+        if (!userId || !asset || !quantity) {
             throw new Error('Parâmetros inválidos');
         }
 
@@ -20,7 +26,7 @@ export class CreateAssetService {
         const portfolioRepository = AppDataSource.getRepository(Portfolio);
 
         const user = await userRepository.findOne({
-            where: { id: userId },
+            where: { name: userId },
             relations: ['portfolio']
         });
 
@@ -28,9 +34,9 @@ export class CreateAssetService {
             throw new Error('Usuário não encontrado');
         }
 
-        const asset = await assetRepository.findOne({where: { id: assetId }});
+        const assetInRepository = await assetRepository.findOne({where: { code: asset.symbol }});
 
-        if (!asset) {
+        if (!assetInRepository) {
             throw new Error('Ação não encontrada');
         }
 
@@ -41,20 +47,19 @@ export class CreateAssetService {
         }
 
         // Verificar se a ação já está no portfólio
-        let assetInPortfolio = portfolio.assets.find(a => a.id === assetId);
+        let assetInPortfolio = portfolio.assets.find(a => a.id === assetInRepository.id);
 
         if (assetInPortfolio) {
             // Atualize a quantidade da ação existente
-            assetInPortfolio.currentValue = asset.currentValue;
+            assetInPortfolio.currentValue = asset.price;
             assetInPortfolio.quantity += quantity;
         } else {
             // Adicionar nova ação ao portfólio
             assetInPortfolio = new Asset();
-            assetInPortfolio.id = asset.id;
-            assetInPortfolio.code = asset.code;
-            assetInPortfolio.currentValue = asset.currentValue;
+            assetInPortfolio.code = asset.symbol;
+            assetInPortfolio.currentValue = asset.price;
             assetInPortfolio.name = asset.name;
-            assetInPortfolio.yield = asset.yield;
+            assetInPortfolio.yield = 0;
             assetInPortfolio.quantity = quantity;
             assetInPortfolio.portfolio = portfolio;
 
