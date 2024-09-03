@@ -1,18 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
 import { FaDollarSign, FaPlus, FaFilter } from 'react-icons/fa'; // Ícones adicionados
 import DepositoService from '../../services/DepositoService';
+import InvestService from '../../services/InvestService';
 import authService from '../../services/AuthService';
 
 
 function HomePage() {
     const [modalOpen, setModalOpen] = useState(false); // Estado para o modal
-    const [depositAmount, setDepositAmount] = useState(''); // Valor do depósito
-  
+    const [depositAmount, setDepositAmount] = useState(0); // Valor do depósito
+    const [totalInvested, setTotalInvested] = useState(0);
+    const [portfolioValue, setPortfolioValue] = useState(0);
+
     // Calcula o valor total investido
-    const totalInvestido = 1500.00; // Exemplo, substitua pelo valor real
-    const valorCarteira = 1200.00; // Exemplo, substitua pelo valor real
     const openModal = () => {
         setModalOpen(true);
     };
@@ -33,6 +34,25 @@ function HomePage() {
         }
     };
 
+    useEffect(() => {
+        const loggedUser = authService.getUserId();
+        async function fetchTotalInvested() {
+            const response = await InvestService.getTotal(loggedUser);
+            setTotalInvested(response.totalInvested || 0);
+        }
+
+        function getTotalAmount() {
+            const availableBalance = parseFloat(localStorage.getItem('available_balance'))
+            
+            if(totalInvested) {
+                setPortfolioValue(totalInvested + availableBalance)
+            }
+        }
+        
+        fetchTotalInvested();
+        getTotalAmount();
+    }, [totalInvested, depositAmount])
+
   
     return (
         <div className="homepage">
@@ -40,11 +60,11 @@ function HomePage() {
                 <div className="investimento-container">
                     <div className="total-investido-container">
                         <h2 className="total-investido-title">Valor Total Investido</h2>
-                        <p className="total-investido-value">R${totalInvestido}</p>
+                        <p className="total-investido-value">R${totalInvested.toFixed(2)}</p>
                     </div>
                     <div className="carteira-container">
                         <h2 className="carteira-title">Valor da Carteira</h2>
-                        <p className="carteira-value">R${valorCarteira.toFixed(2)}</p>
+                        <p className="carteira-value">R${portfolioValue.toFixed(2)}</p>
                     </div>
                 </div>
                 <div className="actions-container">

@@ -1,7 +1,38 @@
 import { Request, Response } from 'express';
 import { GetAssetPricesService } from '../services/GetAssetPricesService';
 
-const SYMBOLS = ['IBM', 'AAPL', 'GOOGL', 'MSFT']; // Exemplo de símbolos válidos
+const SYMBOLS = [
+    'AAPL', // Apple Inc.
+    'ADBE', // Adobe Inc.
+    'AMZN', // Amazon.com, Inc.
+    'BAC',  // Bank of America Corporation
+    'CSCO', // Cisco Systems, Inc.
+    'CVX',  // Chevron Corporation
+    'DIS',  // The Walt Disney Company
+    'GOOGL',// Alphabet Inc. (Google)
+    'HD',   // The Home Depot, Inc.
+    'IBM',  // International Business Machines Corporation
+    'INTC', // Intel Corporation
+    'JPM',  // JPMorgan Chase & Co.
+    'KO',   // The Coca-Cola Company
+    'MA',   // Mastercard Incorporated
+    'META', // Meta Platforms, Inc. (antigo Facebook)
+    'MRK',  // Merck & Co., Inc.
+    'MSFT', // Microsoft Corporation
+    'NFLX', // Netflix, Inc.
+    'NKE',  // NIKE, Inc.
+    'NVDA', // NVIDIA Corporation
+    'ORCL', // Oracle Corporation
+    'PEP',  // PepsiCo, Inc.
+    'PFE',  // Pfizer Inc.
+    'PG',   // The Procter & Gamble Company
+    'PYPL', // PayPal Holdings, Inc.
+    'TSLA', // Tesla, Inc.
+    'UNH',  // UnitedHealth Group Incorporated
+    'V',    // Visa Inc.
+    'WMT',  // Walmart Inc.
+    'XOM',  // Exxon Mobil Corporation
+];
 
 export class AssetPricerController {
     async handle(req: Request, res: Response) {

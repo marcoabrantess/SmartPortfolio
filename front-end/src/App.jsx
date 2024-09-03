@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import HomePage from './pages/HomePage/HomePage';
@@ -20,9 +20,10 @@ const AppRoutes = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/comprar" element={<ComprarPage />} />
-        <Route path="/" element={<LoginPage />} />
         <Route path="/vender" element={<VenderPage />} />
-
+        <Route path="/" element={<Navigate to="/login" />} /> {/* Redireciona para a página de login por padrão */}
+        {/* Adiciona uma rota padrão para páginas não encontradas */}
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </>
   );

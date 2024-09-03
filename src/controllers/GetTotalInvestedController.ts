@@ -1,27 +1,40 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../data-source';
 import { User } from '../models/User';
+import { GetAssetPricesService } from '../services/GetAssetPricesService'; // Ajuste o caminho conforme necessário
 
-export const getUserTotalInvested = async (req: Request, res: Response) => {
-    const userId = req.params.id;
+export class GetUserTotalInvestedController {
+    async handle (req: Request, res: Response) {
+        try {
+            const { userId } = req.body;
+            const userRepository = AppDataSource.getRepository(User);
 
-    try {
-        const userRepository = AppDataSource.getRepository(User);
-        const user = await userRepository.findOne({
-            where: { id: userId },
-            relations: ['portfolio']
-        });
+            // Carregar o usuário com a relação do portfólio
+            const user = await userRepository.findOne({
+                where: { id: userId },
+                relations: ['portfolio', 'portfolio.assets'] // Certifique-se de carregar as relações necessárias
+            });
 
-        if (!user) {
-            return res.status(404).json({ message: 'Usuário não encontrado' });
+            if (!user) {
+                throw new Error('Usuário não encontrado');
+            }
+            const getAssetPricesService = new GetAssetPricesService([]);
+            // Calcular o total investido
+            const totalInvested = await user.portfolio?.assets.reduce(async (totalPromise, asset) => {
+                const total = await totalPromise;
+                const price = await getAssetPricesService.getAssetPriceBySymbol(asset.code);
+
+                if (price !== null) {
+                    return total + price * asset.quantity;
+                } else {
+                    return total; // Se o preço não estiver disponível, não adiciona nada
+                }
+            }, Promise.resolve(0)) || 0;
+
+            return res.status(200).json({success: true, totalInvested: totalInvested})
+        } catch (error) {
+            console.error('Erro ao obter valor total investido:', error);
+            return res.status(500).json({success: false, error: error})
         }
-
-        const totalInvested = await user.getTotalInvestedValue();
-        console.log(`Valor total investido pelo usuário ${userId}: R$${totalInvested}`);
-        
-        res.json({ totalInvested });
-    } catch (error) {
-        console.error('Erro ao obter valor total investido:', error);
-        res.status(500).json({ message: 'Erro interno do servidor' });
     }
 };

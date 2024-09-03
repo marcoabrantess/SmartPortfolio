@@ -25,7 +25,6 @@ function ComprarPage() {
     const handleBuy = (acao) => {
         setSelectedAcao(acao);
         setModalOpen(true);
-        // handlePurchase(acao);
     };
 
     const closeModal = () => {
@@ -37,22 +36,20 @@ function ComprarPage() {
     };
 
     const handlePurchase = async () => {
-        console.log(selectedAcao)
         if (!selectedAcao) return;
 
-       try{
+        try {
             const userId = authService.getUserId();
             const result = await acoesService.comprarAcao(selectedAcao, quantity, userId);
 
-            if(result.success){
+            if (result.success) {
                 setLoading(false); // Para o spinner
                 setSuccess(true); // Mostra o ícone de sucesso
                 setTimeout(() => {
                     closeModal(); // Fecha o modal após o intervalo
                 }, 2000); // Intervalo de 2 segundos
             }
-        }
-        catch(error){
+        } catch (error) {
             console.error('Erro ao comprar ação:', error);
         }
     };
@@ -60,21 +57,23 @@ function ComprarPage() {
     return (
         <div className="compra-page">
             <h1>Disponíveis para compra</h1>
-            <div className="cards-container">
-                {acoes.map((acao, index) => (
-                    <div className="card" key={index}>
-                        <h2>{acao.name}</h2>
-                        <p>Valor R$: {acao.price}</p>
-                        <p>Nome: {acao.name} </p>
-                        <p>Código: {acao.symbol}</p>
-                        <button 
-                            className="buy-button" 
-                            onClick={() => handleBuy(acao)}
-                        >
-                            Comprar
-                        </button>
-                    </div>
-                ))}
+            <div className="cards-wrapper">
+                <div className="cards-container">
+                    {acoes.map((acao, index) => (
+                        <div className="card" key={index}>
+                            <h2>{acao.name}</h2>
+                            <p>Valor R$: {acao.price}</p>
+                            <p>Nome: {acao.name}</p>
+                            <p>Código: {acao.symbol}</p>
+                            <button 
+                                className="buy-button" 
+                                onClick={() => handleBuy(acao)}
+                            >
+                                Comprar
+                            </button>
+                        </div>
+                    ))}
+                </div>
             </div>
             {modalOpen && selectedAcao && (
                 <div className="modal-overlay">
@@ -89,14 +88,14 @@ function ComprarPage() {
                             min="1"
                             placeholder="Quantidade" 
                         />
-                         <button onClick={handlePurchase} className="modal-button" disabled={loading}>
-                            {loading ? "Carregando..." : "Confirmar"} {/* Botão desabilitado durante o carregamento */}
+                        <button onClick={handlePurchase} className="modal-button" disabled={loading}>
+                            {loading ? "Carregando..." : "Confirmar"}
                         </button>
                         <button onClick={closeModal} className="modal-button cancel-button" disabled={loading}>
                             Cancelar
                         </button>
-                        {loading && <div className="spinner"></div>} {/* Exibe o spinner durante o carregamento */}
-                        {success && <div className="success-message">Compra realizada com sucesso!</div>} {/* Exibe a mensagem de sucesso */}
+                        {loading && <div className="spinner"></div>}
+                        {success && <div className="success-message">Compra realizada com sucesso!</div>}
                     </div>
                 </div>
             )}
