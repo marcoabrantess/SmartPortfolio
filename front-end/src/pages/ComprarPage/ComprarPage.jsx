@@ -23,7 +23,6 @@ function ComprarPage() {
     const handleBuy = (acao) => {
         setSelectedAcao(acao);
         setModalOpen(true);
-        handlePurchase(acao);
     };
 
     const closeModal = () => {
@@ -37,7 +36,7 @@ function ComprarPage() {
 
        try{
             const userId = authService.getUser();
-            const result = acoesService.comprarAcao(acao, quantity, userId);
+            const result = acoesService.comprarAcao(asset, quantity, userId);
 
             if(result.success){
                 console.log('Compra realizada com sucesso!');
