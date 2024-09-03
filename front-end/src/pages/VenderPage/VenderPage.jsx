@@ -56,6 +56,8 @@ function VenderPage() {
             const result = await acoesService.venderAcao(priceId, assetId, quantity, userId);
 
             if(result.success){
+                acao.quantity -= quantity;
+                setAcoes(acao => [...acao]);
                 setLoading(false); // Para o spinner
                 setSuccess(true); // Mostra o ícone de sucesso
                 setTimeout(() => {
