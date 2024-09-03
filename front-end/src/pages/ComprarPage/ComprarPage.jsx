@@ -25,10 +25,7 @@ function ComprarPage() {
     const handleBuy = (acao) => {
         setSelectedAcao(acao);
         setModalOpen(true);
-<<<<<<< HEAD
         // handlePurchase(acao);
-=======
->>>>>>> 45edbd707241c96debbdb3ce7bd5dfa701aff9f8
     };
 
     const closeModal = () => {
@@ -45,11 +42,7 @@ function ComprarPage() {
 
        try{
             const userId = authService.getUser();
-<<<<<<< HEAD
-            const result = acoesService.comprarAcao(selectedAcao, quantity, userId);
-=======
-            const result = acoesService.comprarAcao(asset, quantity, userId);
->>>>>>> 45edbd707241c96debbdb3ce7bd5dfa701aff9f8
+            const result = await acoesService.comprarAcao(selectedAcao, quantity, userId);
 
             if(result.success){
                 setLoading(false); // Para o spinner
@@ -103,7 +96,7 @@ function ComprarPage() {
                             Cancelar
                         </button>
                         {loading && <div className="spinner"></div>} {/* Exibe o spinner durante o carregamento */}
-                        {success && <div className="success-icon">✔</div>} {/* Exibe o ícone de sucesso após a compra */}
+                        {success && <div className="success-message">Compra realizada com sucesso!</div>} {/* Exibe a mensagem de sucesso */}
                     </div>
                 </div>
             )}
