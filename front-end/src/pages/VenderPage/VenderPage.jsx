@@ -17,7 +17,8 @@ function VenderPage() {
         const loggedUser = authService.getUserId();
         async function fetchAcoes() {
             const response = await acoesService.getAcoesByUserId(loggedUser);
-            setAcoes(response.acoes || []);
+
+            setAcoes(response.assets || []);
         }
         
         fetchAcoes();
