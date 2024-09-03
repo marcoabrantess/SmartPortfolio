@@ -23,7 +23,10 @@ function ComprarPage() {
     const handleBuy = (acao) => {
         setSelectedAcao(acao);
         setModalOpen(true);
+<<<<<<< HEAD
         // handlePurchase(acao);
+=======
+>>>>>>> 45edbd707241c96debbdb3ce7bd5dfa701aff9f8
     };
 
     const closeModal = () => {
@@ -38,7 +41,11 @@ function ComprarPage() {
 
        try{
             const userId = authService.getUser();
+<<<<<<< HEAD
             const result = acoesService.comprarAcao(selectedAcao, quantity, userId);
+=======
+            const result = acoesService.comprarAcao(asset, quantity, userId);
+>>>>>>> 45edbd707241c96debbdb3ce7bd5dfa701aff9f8
 
             if(result.success){
                 console.log('Compra realizada com sucesso!');
