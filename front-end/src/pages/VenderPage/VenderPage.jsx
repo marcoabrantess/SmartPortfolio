@@ -23,7 +23,7 @@ function VenderPage() {
         fetchAcoes();
     }, []);
 
-    const handleBuy = (acao) => {
+    const handleSell = (acao) => {
         setSelectedAcao(acao);
         setModalOpen(true);
         setError(""); // Limpa a mensagem de erro ao abrir o modal
@@ -39,7 +39,7 @@ function VenderPage() {
 
     };
 
-    const handlePurchase = async () => {
+    const handleSelling = async () => {
         console.log(selectedAcao)
         if (!selectedAcao) return;
 
@@ -50,7 +50,7 @@ function VenderPage() {
         
        try{
             const userId = authService.getUser();
-            const result = await acoesService.comprarAcao(selectedAcao, quantity, userId);
+            const result = await acoesService.venderAcao(selectedAcao, quantity, userId);
 
             if(result.success){
                 setLoading(false); // Para o spinner
@@ -78,7 +78,7 @@ function VenderPage() {
                         <p>Quantidade: {acao.quantity}</p>
                         <button 
                             className="buy-button" 
-                            onClick={() => handleBuy(acao)}
+                            onClick={() => handleSell(acao)}
                         >
                             Vender
                         </button>
@@ -98,7 +98,7 @@ function VenderPage() {
                             min="1"
                             placeholder="Quantidade" 
                         />
-                         <button onClick={handlePurchase} className="modal-button" disabled={loading}>
+                         <button onClick={handleSelling} className="modal-button" disabled={loading}>
                             {loading ? "Carregando..." : "Confirmar"} {/* Botão desabilitado durante o carregamento */}
                         </button>
                         <button onClick={closeModal} className="modal-button cancel-button" disabled={loading}>
