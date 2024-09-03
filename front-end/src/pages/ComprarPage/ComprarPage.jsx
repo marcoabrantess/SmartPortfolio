@@ -5,22 +5,32 @@ import authService from '../../services/AuthService';
 
 function ComprarPage() {
     const [acoes, setAcoes] = useState([]);
+    const [filteredAcoes, setFilteredAcoes] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedAcao, setSelectedAcao] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [loading, setLoading] = useState(false); // Estado para controlar o spinner
     const [success, setSuccess] = useState(false); // Estado para controlar o ícone de sucesso
+    const [searchTerm, setSearchTerm] = useState(""); // Estado para o termo de busca
 
     useEffect(() => {
         async function fetchAcoes() {
             const response = await acoesService.getAcoes();
-
-            // Ajuste o código para acessar o array correto
             setAcoes(response.acoes || []);
+            setFilteredAcoes(response.acoes || []);
         }
         
         fetchAcoes();
     }, []);
+
+    useEffect(() => {
+        // Filtra as ações conforme o termo de busca
+        setFilteredAcoes(
+            acoes.filter(acao =>
+                acao.name.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+        );
+    }, [searchTerm, acoes]);
 
     const handleBuy = (acao) => {
         setSelectedAcao(acao);
@@ -56,10 +66,18 @@ function ComprarPage() {
 
     return (
         <div className="compra-page">
+            <br/>
             <h1>Disponíveis para compra</h1>
+            <input
+                type="text"
+                className="search-bar"
+                placeholder="Buscar por nome"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <div className="cards-wrapper">
                 <div className="cards-container">
-                    {acoes.map((acao, index) => (
+                    {filteredAcoes.map((acao, index) => (
                         <div className="card" key={index}>
                             <h2>{acao.name}</h2>
                             <p>Valor R$: {acao.price}</p>
