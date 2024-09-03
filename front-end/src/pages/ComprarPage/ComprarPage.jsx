@@ -42,7 +42,7 @@ function ComprarPage() {
 
        try{
             const userId = authService.getUser();
-            const result = acoesService.comprarAcao(selectedAcao, quantity, userId);
+            const result = await coesService.comprarAcao(selectedAcao, quantity, userId);
 
             if(result.success){
                 setLoading(false); // Para o spinner

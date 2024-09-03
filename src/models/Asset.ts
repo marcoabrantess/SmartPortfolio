@@ -13,7 +13,7 @@ export class Asset {
     @Column({ type: 'varchar' })
     code!: string;
 
-    @Column({ type: 'decimal' })
+    @Column({ name: 'current_value', type: 'decimal' })
     currentValue!: number;
 
     @Column({ type: 'varchar' })
@@ -25,7 +25,11 @@ export class Asset {
     @Column({ type: 'integer' })
     quantity!: number;
 
+    @Column({ type: 'uuid'})
+    portfolio_id: string | undefined ;
+
     @ManyToOne(() => Portfolio, (portfolio) => portfolio.assets)
+    @JoinColumn({ name: 'portfolio_id' })
     portfolio!: Portfolio;
 
     constructor() {
