@@ -42,7 +42,7 @@ function ComprarPage() {
 
        try{
             const userId = authService.getUser();
-            const result = await coesService.comprarAcao(selectedAcao, quantity, userId);
+            const result = await acoesService.comprarAcao(selectedAcao, quantity, userId);
 
             if(result.success){
                 setLoading(false); // Para o spinner
@@ -96,7 +96,7 @@ function ComprarPage() {
                             Cancelar
                         </button>
                         {loading && <div className="spinner"></div>} {/* Exibe o spinner durante o carregamento */}
-                        {success && <div className="success-icon">✔</div>} {/* Exibe o ícone de sucesso após a compra */}
+                        {success && <div className="success-message">Compra realizada com sucesso!</div>} {/* Exibe a mensagem de sucesso */}
                     </div>
                 </div>
             )}
