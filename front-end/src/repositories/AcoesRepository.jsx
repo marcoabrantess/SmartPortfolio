@@ -81,13 +81,13 @@ const acoesRepository = {
   getAcoesByUserId: async (userId) => {
     try {
       const response = await fetch(`${API_BASE_URL}/minhas-acoes`, {
-          method: 'POST',
+          method: 'GET',
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ userId }),
+          params: userId
       });
-      return response.data;
+      return await response.json();
     }
     catch (error) {
       console.error('Erro no acoesRepository:', error);
