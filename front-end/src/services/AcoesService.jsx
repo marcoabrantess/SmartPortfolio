@@ -43,19 +43,13 @@ const acoesService = {
   },
 
   getAcoesByUserId: async (userId) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/minhas-acoes`, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          params: userId
-      });
-      return await response.json();
+    try{
+      const response = await acoesRepository.getAcoesByUserId(userId);
+      return response;
     }
-    catch (error) {
-      console.error('Erro no acoesRepository:', error);
-      throw error;
+    catch(error){
+      console.error('Erro no acoesService:', error);
+      throw error
     }
   }
 }
