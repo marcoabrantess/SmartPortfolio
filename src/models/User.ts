@@ -19,10 +19,18 @@ export class User {
     @Column({ type: 'varchar' })
     password!: string;
 
+    @Column({
+        type: 'decimal',
+        precision: 10,
+        scale: 2,
+        default: "0.00" // Valor padrão como string decimal
+    })
+    available_balance!: number
+
     @Column({ type: 'uuid'})
     portfolio_id: string | undefined ;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ type: 'date'})
     created_at!: Date;
 
     @OneToOne(() => Portfolio, { cascade: true, eager: true })

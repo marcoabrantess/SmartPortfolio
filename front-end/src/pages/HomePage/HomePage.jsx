@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import './HomePage.css';
 import { FaDollarSign, FaPlus, FaFilter } from 'react-icons/fa'; // Ícones adicionados
 import DepositoService from '../../services/DepositoService';
+import authService from '../../services/AuthService';
+
 
 function HomePage() {
     const [modalOpen, setModalOpen] = useState(false); // Estado para o modal
@@ -22,13 +24,15 @@ function HomePage() {
 
     const handleDeposit = async () => {
         try{
-            await DepositoService.depositar(depositAmount);
+            const userId = authService.getUserId();
+            await DepositoService.depositar(depositAmount, userId);
             closeModal(); 
         }
         catch(error){
            console.log(error);
+        }
     };
-}
+
   
     return (
         <div className="homepage">

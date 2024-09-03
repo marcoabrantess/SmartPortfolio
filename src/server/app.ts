@@ -4,6 +4,7 @@ import cors from 'cors';
 import { stockPriceRoutes } from '../routes/assets';
 import { userRoutes } from '../routes/user';
 import { authRoutes } from '../routes/auth';
+import { depositRoutes } from '../routes/deposit';
 
 import { AppDataSource } from '../data-source';
 
@@ -23,5 +24,6 @@ app.use(cors());
 app.use(stockPriceRoutes);
 app.use(userRoutes)
 app.use(authRoutes)
+app.use(depositRoutes)
 
 export { app };

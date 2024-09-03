@@ -1,12 +1,26 @@
 import axios from 'axios';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+
 const DepositoRepository = {
-    enviarValor: async (valor) => {
+    enviarValor: async (depositAmount, userId) => {
         try {
-            const response = await axios.post('/api/deposito', { valor });
-            return response.data;
+            //response será um model User
+            const response = await fetch(`${API_BASE_URL}/depositar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                
+                body: JSON.stringify({ depositAmount, userId }),
+            });
+
+            const data = await response.json();
+            return data;
         } catch (error) {
-            throw new Error('Erro ao fazer o depósito');
+            console.error('Erro ao depositar:', error);
+            throw error;
         }
     }
 };

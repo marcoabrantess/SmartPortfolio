@@ -29,8 +29,8 @@ export class AuthController {
         }
 
         try {
-            const { token, name, userId } = await AuthService.login(login, password);
-            return res.status(200).json({ token, name, userId });
+            const { token, user} = await AuthService.login(login, password);
+            return res.status(200).json({ token, user });
         } catch (error: unknown) {
             // Verifica se o erro é uma instância de Error
             if (error instanceof Error) {

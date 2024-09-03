@@ -8,10 +8,15 @@ const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1h';
 
 const userRepository = AppDataSource.getRepository(User);
 
-type login = {
-    token: string,
+interface userInformations {
+    userId: string,
     name: string,
-    userId: string
+    available_balance: number
+}
+
+interface login {
+    token: string,
+    user: userInformations
 }
 
 export class AuthService {
@@ -33,9 +38,13 @@ export class AuthService {
         if (!isMatch) throw new Error('Senha invalida');
 
         const token = jwt.sign({ login: user.login }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
-        const name = user.name;
-        const userId = user.id;
 
-        return { token, name, userId };
+        const userInformation: userInformations = {
+            userId: user.id,
+            name: user.name,
+            available_balance: user.available_balance // Certifique-se de que a coluna está corretamente nomeada e acessível
+        };
+
+        return { token, user: userInformation };
     }
 }

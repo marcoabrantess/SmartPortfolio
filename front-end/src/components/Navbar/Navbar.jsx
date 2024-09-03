@@ -10,7 +10,7 @@ const Navbar = ({ children }) => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [userName, setUserName] = useState('');
-    const [carteira, setTotalCarteira] = useState();
+    const [available_balance, setBalance] = useState();
     const navigate = useNavigate();
 
     const toggleDropdown = () => {
@@ -24,8 +24,9 @@ const Navbar = ({ children }) => {
 
     useEffect(() => {
         const name = authService.getUser(); // Obtém o nome do usuário
-        //const cartUser = acoesService.getTotalCarteira();
+        const available_balance = authService.getBalance();
 
+        setBalance(available_balance);
         setUserName(name);
         //setTotalCarteira(cartUser);
     }, []);
@@ -60,7 +61,7 @@ const Navbar = ({ children }) => {
                         {dropdownOpen && (
                             <div className="dropdown-menu">
                                 <p>{userName}</p>
-                                <p>Saldo: R${carteira}</p>
+                                <p>Saldo: R${available_balance}</p>
                                 <Link to="/minhas-acoes">Minhas Ações</Link>
                                 <Link to="/extrato">Extrato</Link>
                                 <button onClick={handleLogout} className="logout-button">Logout</button>
