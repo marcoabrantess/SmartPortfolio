@@ -19,8 +19,17 @@ const acoesService = {
       console.error('Erro no acoesService:', error);
       throw error;
     }
-    
-},
+  },
+
+  venderAcao: async (asset, quantity, userId) => {
+    try {
+      const result = await acoesRepository.venderAcao(asset, quantity, userId);
+      return result;
+    } catch (error) {
+      console.error('Erro no acoesService:', error);
+      throw error;
+    }
+  },
 
   getTotalCarteira: async () => {
     try {
@@ -32,6 +41,17 @@ const acoesService = {
       throw error;
     }
   },
+
+  getAcoesByUserId: async (userId) => {
+    try{
+      const response = await acoesRepository.getAcoesByUserId(userId);
+      return response;
+    }
+    catch(error){
+      console.error('Erro no acoesService:', error);
+      throw error
+    }
+  }
 }
 
 export default acoesService;

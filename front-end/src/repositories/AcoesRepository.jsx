@@ -44,6 +44,25 @@ const acoesRepository = {
     }
   },
 
+  venderAcao: async (asset, quantity, userId) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/vender-acao`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ asset, quantity, userId }),
+      });
+      if (!response.ok) {
+          throw new Error('Erro na venda da ação');
+      }
+      return await response.json();
+    } catch (error) {
+        console.error('Erro ao venda ação:', error);
+        throw error;
+    }
+  },
+
   getTotalCarteira: async () => {
     try {
       const response = await axios.get('/api/acoes/totalCarteira', {
@@ -57,7 +76,23 @@ const acoesRepository = {
       console.error('Erro no acoesRepository:', error);
       throw error;
     }
+  },
+
+  getAcoesByUserId: async (userId) => {
+    try {
+      const response = await axios.get(`/api/acoes/${userId}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`, // Pega o token do localStorage
+        },
+      });
+      return response.data;
+    }
+    catch (error) {
+      console.error('Erro no acoesRepository:', error);
+      throw error;
+    }
   }
+
 };
 
 export default acoesRepository;
