@@ -1,8 +1,13 @@
-// src/pages/ExibirAcoesPage/ExibirAcoesPage.jsx
+// src/pages/PortfolioPage/PortfolioPage.jsx
+
 import { useEffect, useState } from 'react';
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import './PortfolioPage.css'; // Corrigido para o nome correto do arquivo CSS
 import acoesService from '../../services/AcoesService';
 import authService from '../../services/AuthService';
+
+ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
 function PortfolioPage() {
     const [acoes, setAcoes] = useState([]);
@@ -40,9 +45,20 @@ function PortfolioPage() {
         return "=";
     };
 
+    const chartData = {
+        labels: acoes.map(acao => acao.name),
+        datasets: [
+            {
+                data: acoes.map(acao => acao.quantity),
+                backgroundColor: acoes.map(() => `hsl(${Math.random() * 360}, 70%, 70%)`), // Cores aleatórias
+                borderColor: '#fff',
+                borderWidth: 1,
+            },
+        ],
+    };
+
     return (
         <div className="exibir-page">
-            <br />
             <h1>Ações Disponíveis</h1>
             {loading && <div className="spinner"></div>}
             {error && <div className="error-message">{error}</div>}
@@ -58,6 +74,12 @@ function PortfolioPage() {
                     </div>
                 ))}
             </div>
+            {acoes.length > 0 && (
+                <div className="chart-container">
+                    <h2>Distribuição das Ações</h2>
+                    <Pie data={chartData} />
+                </div>
+            )}
         </div>
     );
 }

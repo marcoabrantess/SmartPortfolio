@@ -81,8 +81,8 @@ function ComprarPage() {
 
     return (
         <div className="compra-page">
-            <br/>
             <h1>Disponíveis para compra</h1>
+            <br/>
             <input
                 type="text"
                 className="search-bar"
