@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../data-source';
 import { User } from '../models/User';
-import { GetAssetPricesService } from '../services/GetAssetPricesService'; // Ajuste o caminho conforme necessário
 
-export class GetUserTotalInvestedController {
+export class GetUserAmountController {
     async handle (req: Request, res: Response) {
         try {
             const { userId } = req.params;
@@ -18,20 +17,10 @@ export class GetUserTotalInvestedController {
             if (!user) {
                 throw new Error('Usuário não encontrado');
             }
-            const getAssetPricesService = new GetAssetPricesService([]);
-            // Calcular o total investido
-            const totalInvested = await user.portfolio?.assets.reduce(async (totalPromise, asset) => {
-                const total = await totalPromise;
-                const price = await getAssetPricesService.getAssetPriceBySymbol(asset.code);
+            
+            const amount = Number(user.available_balance);
 
-                if (price !== null) {
-                    return total + price * asset.quantity;
-                } else {
-                    return total; // Se o preço não estiver disponível, não adiciona nada
-                }
-            }, Promise.resolve(0)) || 0;
-
-            return res.status(200).json({success: true, totalInvested: totalInvested})
+            return res.status(200).json({success: true, amount: amount})
         } catch (error) {
             console.error('Erro ao obter valor total investido:', error);
             return res.status(500).json({success: false, error: error})

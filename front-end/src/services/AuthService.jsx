@@ -4,13 +4,12 @@ const authService = {
     login: async (login, password) => {
         try {
             const data = await authRepository.authenticateUser(login, password);    
-            console.log(data);
+
             const {token, user} = data;
 
             localStorage.setItem('access_token', token);
-            localStorage.setItem('user', user.name);
+            localStorage.setItem('name', user.name);
             localStorage.setItem('userId', user.userId);
-            localStorage.setItem('available_balance', user.available_balance.toString());
             
             return data.success;
         } catch (error) {
@@ -20,15 +19,11 @@ const authService = {
     },
 
     getUser: () => {
-        return localStorage.getItem('user');
+        return localStorage.getItem('name');
     },
 
     getUserId: () => {
         return localStorage.getItem('userId');
-    },
-
-    getBalance: () => {
-        return localStorage.getItem('available_balance');
     },
 
     logout: () => {

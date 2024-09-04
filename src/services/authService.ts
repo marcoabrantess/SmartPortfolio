@@ -11,7 +11,6 @@ const userRepository = AppDataSource.getRepository(User);
 interface userInformations {
     userId: string,
     name: string,
-    available_balance: number
 }
 
 interface login {
@@ -42,7 +41,6 @@ export class AuthService {
         const userInformation: userInformations = {
             userId: user.id,
             name: user.name,
-            available_balance: user.available_balance // Certifique-se de que a coluna está corretamente nomeada e acessível
         };
 
         return { token, user: userInformation };

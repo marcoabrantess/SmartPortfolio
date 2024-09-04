@@ -4,19 +4,37 @@ const InvestRepository = {
     getTotal: async (userId) => {
         try {
             //response será um model User
-            const response = await fetch(`${API_BASE_URL}/obter-total-investido`, {
-                method: 'POST',
+            const response = await fetch(`${API_BASE_URL}/obter-total-investido/${userId}`, {
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                
-                body: JSON.stringify({ userId }),
+                params: userId
             });
 
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error('Erro ao depositar:', error);
+            console.error('Erro ao buscar valor total:', error);
+            throw error;
+        }
+    },
+
+    getUserAmount: async (userId) => {
+        try {
+            //response será um model User
+            const response = await fetch(`${API_BASE_URL}/obter-total-depositado/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                params: userId
+            });
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Erro ao buscar valor total:', error);
             throw error;
         }
     }

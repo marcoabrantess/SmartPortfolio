@@ -14,7 +14,6 @@ export class ManageBalanceService {
             throw new Error('Usuário não encontrado');
         }
 
-        console.log(depositAmount)
 
         // Converte available_balance e depositAmount para números antes de somar
         const currentBalance = parseFloat(user.available_balance.toString());

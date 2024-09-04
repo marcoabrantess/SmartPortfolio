@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage/HomePage';
 import ComprarPage from './pages/ComprarPage/ComprarPage';
 import Navbar from './components/Navbar/Navbar';
 import VenderPage from './pages/VenderPage/VenderPage';
+import { UserAmountProvider } from './context/UserAmountContext';
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -14,26 +15,28 @@ const AppRoutes = () => {
 
   return (
     <>
-      {showNavbar && <Navbar />}
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/comprar" element={<ComprarPage />} />
-        <Route path="/vender" element={<VenderPage />} />
-        <Route path="/" element={<Navigate to="/login" />} /> {/* Redireciona para a página de login por padrão */}
-        {/* Adiciona uma rota padrão para páginas não encontradas */}
-        <Route path="*" element={<Navigate to="/login" />} />
-      </Routes>
+        {showNavbar && <Navbar />}
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/comprar" element={<ComprarPage />} />
+          <Route path="/vender" element={<VenderPage />} />
+          <Route path="/" element={<Navigate to="/login" />} /> {/* Redireciona para a página de login por padrão */}
+          {/* Adiciona uma rota padrão para páginas não encontradas */}
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
     </>
   );
 };
 
 function App() {
   return (
-    <Router>
-      <AppRoutes />
-    </Router>
+    <UserAmountProvider>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </UserAmountProvider>
   );
 }
 

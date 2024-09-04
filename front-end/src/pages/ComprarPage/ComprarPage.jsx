@@ -117,6 +117,7 @@ function ComprarPage() {
                     </div>
                 </div>
             )}
+            <br/>
         </div>
     );
 }
