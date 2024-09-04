@@ -5,11 +5,6 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 const acoesRepository = {
   getAcoes: async () => {
     try {
-      // {
-      //   headers: {
-      //     'Authorization': `Bearer ${localStorage.getItem('access_token')}`, // Pega o token do localStorage
-      //   },
-      // }
       const response = await fetch(`${API_BASE_URL}/assets-price`, {
         method: 'GET',
         headers: {

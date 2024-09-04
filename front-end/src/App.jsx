@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage/HomePage';
 import ComprarPage from './pages/ComprarPage/ComprarPage';
 import Navbar from './components/Navbar/Navbar';
 import VenderPage from './pages/VenderPage/VenderPage';
+import PortfolioPage from './pages/PortfolioPage/PortfolioPage';
 import { UserAmountProvider } from './context/UserAmountContext';
 
 const AppRoutes = () => {
@@ -22,6 +23,7 @@ const AppRoutes = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="/comprar" element={<ComprarPage />} />
           <Route path="/vender" element={<VenderPage />} />
+          <Route path="/minhas-acoes" element={<PortfolioPage />} />
           <Route path="/" element={<Navigate to="/login" />} /> {/* Redireciona para a página de login por padrão */}
           {/* Adiciona uma rota padrão para páginas não encontradas */}
           <Route path="*" element={<Navigate to="/login" />} />

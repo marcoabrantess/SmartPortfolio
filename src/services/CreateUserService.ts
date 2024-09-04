@@ -1,6 +1,7 @@
 import { AppDataSource } from "../data-source";
 import { User } from "../models/User";
 import { CreatePortfolioService } from "./CreatePortfolioService";
+import bcrypt from 'bcrypt'; // Importa o bcrypt
 
 type UserRequest = {
     name: string,
@@ -33,19 +34,22 @@ export class CreateUserService {
         if (!portfolio) {
             return new Error("Failed to create portfolio");
         }
-        
+
+        // Criptografa a senha
+        const saltRounds = 10; // Número de rounds para o bcrypt gerar o salt
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
         // Cria um novo usuário e associa o portfólio
         const user = this.userRepository.create({
             name,
             CPF,
             login,
-            password,
+            password: hashedPassword, // Salva a senha criptografada
             portfolio_id: portfolio.id
         });
 
         // Salva o usuário para obter o ID
         await this.userRepository.save(user);
-
 
         return user;
     }

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import './ComprarPage.css';
 import acoesService from '../../services/AcoesService';
 import authService from '../../services/AuthService';
+import { UserAmountContext } from '../../context/UserAmountContext';
 
 function ComprarPage() {
     const [acoes, setAcoes] = useState([]);
@@ -13,11 +14,20 @@ function ComprarPage() {
     const [success, setSuccess] = useState(false); // Estado para controlar o ícone de sucesso
     const [searchTerm, setSearchTerm] = useState(""); // Estado para o termo de busca
 
+    const { setUserAmount } = useContext(UserAmountContext);
+
     useEffect(() => {
         async function fetchAcoes() {
-            const response = await acoesService.getAcoes();
-            setAcoes(response.acoes || []);
-            setFilteredAcoes(response.acoes || []);
+            setLoading(true);
+            try {
+                    const response = await acoesService.getAcoes();
+                    setAcoes(response.acoes || []);
+                    setFilteredAcoes(response.acoes || []);
+            } catch (error) {
+                console.error('Erro ao carregar ações:', error);
+            } finally {
+                setLoading(false);
+            }
         }
         
         fetchAcoes();
@@ -55,6 +65,11 @@ function ComprarPage() {
             if (result.success) {
                 setLoading(false); // Para o spinner
                 setSuccess(true); // Mostra o ícone de sucesso
+
+                // Atualiza o saldo do usuário
+                const price = selectedAcao.price;
+                setUserAmount(prevAmount => prevAmount - (price * quantity));
+
                 setTimeout(() => {
                     closeModal(); // Fecha o modal após o intervalo
                 }, 2000); // Intervalo de 2 segundos
@@ -74,7 +89,8 @@ function ComprarPage() {
                 placeholder="Buscar por nome"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-            />
+                />
+            {loading && <div className="spinner"></div>}
             <div className="cards-wrapper">
                 <div className="cards-container">
                     {filteredAcoes.map((acao, index) => (

@@ -14,13 +14,20 @@ function VenderPage() {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
 
-    const { userAmount, setUserAmount } = useContext(UserAmountContext);
+    const { setUserAmount } = useContext(UserAmountContext);
 
     useEffect(() => {
         const loggedUser = authService.getUserId();
         async function fetchAcoes() {
-            const response = await acoesService.getAcoesByUserId(loggedUser);
-            setAcoes(response.assets || []);
+            setLoading(true);
+            try {
+                const response = await acoesService.getAcoesByUserId(loggedUser);
+                setAcoes(response.assets || []);
+            } catch (error) {
+                console.error('Erro ao carregar ações:', error);
+            } finally {
+                setLoading(false);
+            }
         }
         fetchAcoes();
     }, []);
@@ -75,6 +82,7 @@ function VenderPage() {
         <div className="compra-page">
             <br/>
             <h1>Suas ações disponíveis</h1>
+            {loading && <div className="spinner"></div>}
             <div className="cards-container">
                 {acoes.map((acao, index) => (
                     <div className="card" key={index}>

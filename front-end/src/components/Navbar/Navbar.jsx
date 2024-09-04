@@ -54,7 +54,7 @@ const Navbar = () => {
                         {dropdownOpen && (
                             <div className="dropdown-menu">
                                 <p>{userName}</p>
-                                <p>Saldo: R${userAmount}</p>
+                                <p>Saldo: R${userAmount.toFixed(2)}</p>
                                 <Link to="/minhas-acoes">Minhas Ações</Link>
                                 <button onClick={handleLogout} className="logout-button">Logout</button>
                             </div>
