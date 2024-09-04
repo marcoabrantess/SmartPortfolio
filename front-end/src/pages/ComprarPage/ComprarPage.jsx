@@ -91,7 +91,6 @@ function ComprarPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 />
             {loading && <div className="spinner"></div>}
-            <div className="cards-wrapper">
                 <div className="cards-container">
                     {filteredAcoes.map((acao, index) => (
                         <div className="card" key={index}>
@@ -108,7 +107,6 @@ function ComprarPage() {
                         </div>
                     ))}
                 </div>
-            </div>
             {modalOpen && selectedAcao && (
                 <div className="modal-overlay">
                     <div className="modal-content">

@@ -6,7 +6,6 @@
     justify-content: center;
     align-items: center;
     height: 100vh; /* Altura da viewport */
-    background-color: #f4f4f4; /* Cor de fundo da página */
     margin: 0;
 }
 
@@ -74,7 +73,7 @@
 
 /* Estilização específica do botão Depositar */
 .deposit-button {
-    background-color: #7aef82;
+    background-color: #60db68;
     color: white;
     border: none; /* Remove a borda padrão para botões */
     width: 150px; /* Garante que tenha a mesma largura que outros botões de ação */
@@ -88,7 +87,7 @@
 }
 
 .deposit-button:hover {
-    background-color: #11fd5c;
+    background-color: #22b952;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
