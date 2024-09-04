@@ -1,0 +1,74 @@
+/* src/pages/ExibirAcoesPage/ExibirAcoesPage.css */
+
+.exibir-page {
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 250px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* Para posicionar o ícone */
+}
+
+.card h2 {
+    font-size: 18px;
+    margin: 0 0 10px;
+}
+
+.card p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.card.positive {
+    background: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.card.negative {
+    background: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.card.neutral {
+    background: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+.card::after {
+    content: attr(data-icon);
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.spinner {
+    text-align: center;
+    font-size: 18px;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    font-size: 16px;
+}

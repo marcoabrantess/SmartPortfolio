@@ -14,6 +14,7 @@ const LoginForm = () => {
         e.preventDefault();
         try {
             await authService.login(login, password);
+            setErrorMessage('')
             setsucessMessage('Login bem sucedido! Redirecionando para a página inicial...');
             setTimeout(() => {
                 navigate('/home');

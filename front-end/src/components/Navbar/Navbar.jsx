@@ -1,33 +1,30 @@
 // src/components/Navbar/Layout.jsx
-import React, { useEffect, useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import { FaHome, FaUserCircle } from 'react-icons/fa';
 import authService from '../../services/AuthService';
-import acoesService from '../../services/AcoesService';
+import { UserAmountContext } from '../../context/UserAmountContext';
 
-const Navbar = ({ children }) => {
-
+const Navbar = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [userName, setUserName] = useState('');
-    const [carteira, setTotalCarteira] = useState();
     const navigate = useNavigate();
+    
+    const { userAmount } = useContext(UserAmountContext);
 
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
     };
 
     const handleLogout = () => {
-        authService.logout(); // Chama a função de logout
-        navigate('/login'); // Redireciona o usuário para a página de login
+        authService.logout();
+        navigate('/login');
     };
 
     useEffect(() => {
-        const name = authService.getUser(); // Obtém o nome do usuário
-        //const cartUser = acoesService.getTotalCarteira();
-
+        const name = authService.getUser();
         setUserName(name);
-        //setTotalCarteira(cartUser);
     }, []);
 
     const goHome = () => {
@@ -39,10 +36,7 @@ const Navbar = ({ children }) => {
             <nav className="navbar">
                 <ul className="nav-links">
                     <li>
-                        <Link to="/minhas-acoes">Minhas Ações</Link>
-                    </li>
-                    <li>
-                        <Link to="/filtrar">Filtrar</Link>
+                        <Link to="/minhas-acoes">Minha Carteira</Link>
                     </li>
                     <li>
                         <Link to="/comprar">Comprar</Link>
@@ -60,20 +54,16 @@ const Navbar = ({ children }) => {
                         {dropdownOpen && (
                             <div className="dropdown-menu">
                                 <p>{userName}</p>
-                                <p>Saldo: R${carteira}</p>
+                                <p>Saldo: R${userAmount.toFixed(2)}</p>
                                 <Link to="/minhas-acoes">Minhas Ações</Link>
-                                <Link to="/extrato">Extrato</Link>
                                 <button onClick={handleLogout} className="logout-button">Logout</button>
                             </div>
                         )}
                     </div>
                 </div>
             </nav>
-                    <div className="content">
-                        {children}
-                    </div>
-                </div>
-        );
-    }
+        </div>
+    );
+}
 
-    export default Navbar;
+export default Navbar;

@@ -21,9 +21,9 @@ const acoesService = {
     }
   },
 
-  venderAcao: async (priceId, assetId, quantity, userId) => {
+  venderAcao: async (price, assetId, quantity, userId) => {
     try {
-      const result = await acoesRepository.venderAcao(priceId, assetId, quantity, userId);
+      const result = await acoesRepository.venderAcao(price, assetId, quantity, userId);
       return result;
     } catch (error) {
       console.error('Erro no acoesService:', error);

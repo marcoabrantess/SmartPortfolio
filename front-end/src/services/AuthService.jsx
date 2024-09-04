@@ -4,11 +4,12 @@ const authService = {
     login: async (login, password) => {
         try {
             const data = await authRepository.authenticateUser(login, password);    
-            const {token, name, userId} = data;
+
+            const {token, user} = data;
 
             localStorage.setItem('access_token', token);
-            localStorage.setItem('user', name);
-            localStorage.setItem('userId', userId);
+            localStorage.setItem('name', user.name);
+            localStorage.setItem('userId', user.userId);
             
             return data.success;
         } catch (error) {
@@ -18,7 +19,7 @@ const authService = {
     },
 
     getUser: () => {
-        return localStorage.getItem('user');
+        return localStorage.getItem('name');
     },
 
     getUserId: () => {

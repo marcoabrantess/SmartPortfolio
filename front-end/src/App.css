@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  height: 100vh; /* Garante que o contêiner ocupe toda a altura da viewport */
+  overflow-y: auto; /* Adiciona rolagem vertical se o conteúdo exceder a altura */
 }
 
 .App-logo {
@@ -22,6 +24,8 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  width: 100%; /* Garante que o cabeçalho ocupe a largura total */
+  box-sizing: border-box; /* Inclui padding e border no cálculo da largura total */
 }
 
 .App-link {

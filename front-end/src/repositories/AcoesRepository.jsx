@@ -5,11 +5,6 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 const acoesRepository = {
   getAcoes: async () => {
     try {
-      // {
-      //   headers: {
-      //     'Authorization': `Bearer ${localStorage.getItem('access_token')}`, // Pega o token do localStorage
-      //   },
-      // }
       const response = await fetch(`${API_BASE_URL}/assets-price`, {
         method: 'GET',
         headers: {
@@ -44,14 +39,14 @@ const acoesRepository = {
     }
   },
 
-  venderAcao: async (priceId, assetId, quantity, userId) => {
+  venderAcao: async (price, assetId, quantity, userId) => {
     try {
       const response = await fetch(`${API_BASE_URL}/vender-acao`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ priceId, assetId, quantity, userId }),
+          body: JSON.stringify({ price, assetId, quantity, userId }),
       });
       if (!response.ok) {
           throw new Error('Erro na venda da ação');

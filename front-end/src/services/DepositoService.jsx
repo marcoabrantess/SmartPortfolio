@@ -1,8 +1,8 @@
 import DepositoRepository from "../repositories/DepositoRepository";
 
 const DepositoService = {
-    depositar: async (amount) => {
-        await DepositoRepository.enviarValor(amount);
+    depositar: async (depositAmount, userId) => {
+        await DepositoRepository.enviarValor(depositAmount, userId);
     }
 };
 

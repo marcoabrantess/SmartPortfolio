@@ -22,6 +22,17 @@ export class RemoveAssetService {
         if (!user) {
             throw new Error('Usuário não encontrado');
         }
+
+        // Converte available_balance e depositAmount para números antes de somar
+        const currentBalance = parseFloat(user.available_balance.toString());
+        const assetPrice = parseFloat(price.toString());
+
+        // Atualiza o saldo e arredonda para duas casas decimais
+        const newBalance = parseFloat((currentBalance + assetPrice).toFixed(2));
+
+        user.available_balance = newBalance;
+
+        userRepository.save(user);
         
         const assetInRepository = await assetRepository.findOne({where: { id: assetId }});
 
