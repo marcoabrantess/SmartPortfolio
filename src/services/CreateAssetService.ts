@@ -45,9 +45,16 @@ export class CreateAssetService {
         let assetInPortfolio = assetInRepository? assetInRepository.find(asset => asset.portfolio_id === portfolio.id) : null;
 
         if (assetInPortfolio) {
-            // Atualize a quantidade da ação existente
-            assetInPortfolio.currentValue = asset.price;
-            assetInPortfolio.quantity += quantity;
+            // Calcule o novo preço médio
+            const totalCurrentValue = assetInPortfolio.currentValue * assetInPortfolio.quantity;
+            const totalNewValue = asset.price * quantity;
+            const newQuantity = assetInPortfolio.quantity + quantity;
+            
+            const newAveragePrice = (totalCurrentValue + totalNewValue) / newQuantity;
+
+            // Atualize o preço médio e a quantidade
+            assetInPortfolio.currentValue = newAveragePrice;
+            assetInPortfolio.quantity = newQuantity;
         } else {
             // Adicionar nova ação ao portfólio
             assetInPortfolio = new Asset();

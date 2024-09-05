@@ -32,14 +32,14 @@ function PortfolioPage() {
     }, []);
 
     const getCardClassName = (acao) => {
-        const rendimento = (acao.currentValue - acao.price) / 100;
+        const rendimento = (((acao.price - acao.currentValue) * acao.price) / 100)
         if (rendimento > 0) return "card positive";
         if (rendimento < 0) return "card negative";
         return "card neutral";
     };
 
     const getRendimentoIcon = (acao) => {
-        const rendimento = (acao.currentValue - acao.price) / acao.price * 100;
+        const rendimento = (((acao.price - acao.currentValue) * acao.price) / 100)
         if (rendimento > 0) return "▲";
         if (rendimento < 0) return "▼";
         return "=";
@@ -74,7 +74,7 @@ function PortfolioPage() {
                                 <p>Quantidade: {acao.quantity}</p>
                                 <p>Preço Médio: R$ {acao.currentValue}</p>
                                 <p>Preço Atual: R$ {acao.price}</p>
-                                <p>Rendimento: {((acao.currentValue - acao.price) / 100).toFixed(2)} % <b>{getRendimentoIcon(acao)}</b></p>
+                                <p>Rendimento: {(((acao.price - acao.currentValue) * acao.price) / 100).toFixed(2)} % <b>{getRendimentoIcon(acao)}</b></p>
                             </div>
                         ))}
                     </div>
