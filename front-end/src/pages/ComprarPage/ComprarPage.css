@@ -8,6 +8,13 @@
     box-sizing: border-box;
 }
 
+.compra-page h1 {
+    font-size: 1.2rem; /* Ajuste o tamanho da fonte conforme necessário */
+    text-align: center;
+    margin-top: 40px; /* Adiciona um espaçamento acima do título */
+    margin-bottom: 20px; /* Adiciona um espaçamento abaixo do título */
+}
+
 .search-bar {
     width: 100%;
     max-width: 400px; /* Largura máxima para a barra de busca */

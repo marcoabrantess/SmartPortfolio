@@ -13,7 +13,7 @@ export class GetAssetService {
         const userRepository = AppDataSource.getRepository(User);
 
         const user = await userRepository.findOne({
-            where: { name: userId },
+            where: { id: userId },
             relations: ['portfolio']
         });
 

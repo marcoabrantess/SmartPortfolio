@@ -33,8 +33,7 @@ export class AuthService {
         if (!user) throw new Error('Usuário não existente');
 
         // Verifica se a senha fornecida corresponde à senha criptografada armazenada
-        //const isMatch = await bcrypt.compare(password, user.password);
-        const isMatch = (user.password === password)
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) throw new Error('Senha inválida');
 
         const token = jwt.sign({ login: user.login }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });

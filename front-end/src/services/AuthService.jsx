@@ -34,11 +34,6 @@ const authService = {
         return localStorage.getItem('access_token');
     },
 
-    // sendPasswordResetEmail: async (email) => {
-    //     console.log(`Solicitação de recuperação de senha enviada para: ${email}`);
-    //     return new Promise((resolve));
-    // }
-
     registerUser: async (name, CPF, login, password) => {    
         try {
             return await authRepository.registerUser(name, CPF, login, password);

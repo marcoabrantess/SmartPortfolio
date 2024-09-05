@@ -25,7 +25,7 @@ export class CreateUserService {
             relations: ["portfolio"] // Inclui o relacionamento com o portfólio
         });
         if (existingUser) {
-            return new Error("User already exists");
+            return new Error("CPF ja cadastrado");
         }
         
         // Agora que o ID do usuário existe, crie o portfólio associado

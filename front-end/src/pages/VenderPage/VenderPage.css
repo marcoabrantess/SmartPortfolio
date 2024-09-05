@@ -1,15 +1,20 @@
 /* ComprarPage.css */
 
 /* Estilo para o contêiner da página de compra */
-.compra-page {
-    margin-top: 40px;
+.venda-page {
+    text-align: center;
+    height: 100vh; /* Garante que a página ocupe toda a altura da viewport */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
+    box-sizing: border-box;
 }
 
-/* Estilo para o título */
-.compra-page h1 {
+.venda-page h1 {
     font-size: 1.2rem; /* Ajuste o tamanho da fonte conforme necessário */
     text-align: center;
+    margin-top: 40px; /* Adiciona um espaçamento acima do título */
     margin-bottom: 20px; /* Adiciona um espaçamento abaixo do título */
 }
 
@@ -160,4 +165,12 @@
     font-size: 1.2rem;
     font-weight: bold;
     margin-top: 20px;
+}
+
+/* Adiciona um estilo para a mensagem quando não há ações disponíveis */
+.no-actions-message {
+    font-size: 1rem;
+    color: #ff0000; /* Vermelho para destacar a mensagem */
+    margin-top: 20px;
+    font-weight: bold;
 }

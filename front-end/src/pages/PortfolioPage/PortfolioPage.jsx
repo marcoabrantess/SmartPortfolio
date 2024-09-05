@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
-import './PortfolioPage.css'; // Corrigido para o nome correto do arquivo CSS
+import './PortfolioPage.css';
 import acoesService from '../../services/AcoesService';
 import authService from '../../services/AuthService';
 
@@ -50,7 +50,7 @@ function PortfolioPage() {
         datasets: [
             {
                 data: acoes.map(acao => acao.quantity),
-                backgroundColor: acoes.map(() => `hsl(${Math.random() * 360}, 70%, 70%)`), // Cores aleatórias
+                backgroundColor: acoes.map(() => `hsl(${Math.random() * 360}, 70%, 70%)`),
                 borderColor: '#fff',
                 borderWidth: 1,
             },
@@ -62,23 +62,27 @@ function PortfolioPage() {
             <h1>Ações Disponíveis</h1>
             {loading && <div className="spinner"></div>}
             {error && <div className="error-message">{error}</div>}
-            <div className="cards-container">
-                {acoes.map((acao, index) => (
-                    <div className={getCardClassName(acao)} key={index}>
-                        <h2>{acao.name}</h2>
-                        <p>Código: {acao.code}</p>
-                        <p>Quantidade: {acao.quantity}</p>
-                        <p>Preço Médio: R$ {acao.currentValue}</p>
-                        <p>Preço Atual: R$ {acao.price}</p>
-                        <p>Rendimento: {((acao.currentValue - acao.price) / 100).toFixed(2)} % <b>{getRendimentoIcon(acao)}</b></p>
+            {acoes.length === 0 ? (
+                <div className="no-actions-message">Você não possui ações disponíveis.</div>
+            ) : (
+                <>
+                    <div className="cards-container">
+                        {acoes.map((acao, index) => (
+                            <div className={getCardClassName(acao)} key={index}>
+                                <h2>{acao.name}</h2>
+                                <p>Código: {acao.code}</p>
+                                <p>Quantidade: {acao.quantity}</p>
+                                <p>Preço Médio: R$ {acao.currentValue}</p>
+                                <p>Preço Atual: R$ {acao.price}</p>
+                                <p>Rendimento: {((acao.currentValue - acao.price) / 100).toFixed(2)} % <b>{getRendimentoIcon(acao)}</b></p>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
-            {acoes.length > 0 && (
-                <div className="chart-container">
-                    <h2>Distribuição das Ações</h2>
-                    <Pie data={chartData} />
-                </div>
+                    <div className="chart-container">
+                        <h2>Distribuição das Ações</h2>
+                        <Pie data={chartData} />
+                    </div>
+                </>
             )}
         </div>
     );

@@ -16,7 +16,6 @@ const acoesService = {
       const result = await acoesRepository.comprarAcao(asset, quantity, userId);
       return result;
     } catch (error) {
-      console.error('Erro no acoesService:', error);
       throw error;
     }
   },

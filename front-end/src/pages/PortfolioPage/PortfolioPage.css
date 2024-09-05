@@ -4,8 +4,8 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza horizontalmente */
-    max-height: 100vh; /* Garante que a página ocupe pelo menos a altura da viewport */
+    align-items: center;
+    max-height: 100vh;
     margin-top: 100px;
 }
 
@@ -17,7 +17,7 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px; /* Adiciona espaço entre os cartões */
+    gap: 20px;
 }
 
 .card {
@@ -27,7 +27,7 @@ h1 {
     padding: 20px;
     width: 250px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative; /* Para posicionar o ícone */
+    position: relative;
 }
 
 .card h2 {
@@ -77,10 +77,15 @@ h1 {
     font-size: 16px;
 }
 
-/* Adicione este bloco ao final do seu arquivo CSS */
+.no-actions-message {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
 
 .chart-container {
     margin-top: 40px;
     width: 100%;
-    max-width: 600px; /* Limita a largura máxima do gráfico */
+    max-width: 600px;
 }

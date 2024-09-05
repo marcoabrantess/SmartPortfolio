@@ -48,12 +48,6 @@ export class CreateAssetService {
             // Atualize a quantidade da ação existente
             assetInPortfolio.currentValue = asset.price;
             assetInPortfolio.quantity += quantity;
-
-            if(user.available_balance >= (asset.price * quantity)) {
-                user.available_balance = user.available_balance - (asset.price * quantity)
-            } else {
-                throw "saldo insuficiente"
-            }
         } else {
             // Adicionar nova ação ao portfólio
             assetInPortfolio = new Asset();

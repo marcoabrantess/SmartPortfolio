@@ -13,8 +13,9 @@ function ComprarPage() {
     const [loading, setLoading] = useState(false); // Estado para controlar o spinner
     const [success, setSuccess] = useState(false); // Estado para controlar o ícone de sucesso
     const [searchTerm, setSearchTerm] = useState(""); // Estado para o termo de busca
+    const [error, setError] = useState(""); // Estado para a mensagem de erro
 
-    const { setUserAmount } = useContext(UserAmountContext);
+    const { userAmount, setUserAmount } = useContext(UserAmountContext);
 
     useEffect(() => {
         async function fetchAcoes() {
@@ -53,6 +54,7 @@ function ComprarPage() {
         setQuantity(1);
         setLoading(false); // Reseta o spinner ao fechar o modal
         setSuccess(false); // Reseta o ícone de sucesso ao fechar o modal
+        setError('');
     };
 
     const handlePurchase = async () => {
@@ -68,14 +70,18 @@ function ComprarPage() {
 
                 // Atualiza o saldo do usuário
                 const price = selectedAcao.price;
-                setUserAmount(prevAmount => prevAmount - (price * quantity));
+                const prevAmount = userAmount;
+                setUserAmount(prevAmount - (price * quantity));
 
                 setTimeout(() => {
                     closeModal(); // Fecha o modal após o intervalo
-                }, 2000); // Intervalo de 2 segundos
+                }, 1000); // Intervalo de 2 segundos
             }
         } catch (error) {
-            console.error('Erro ao comprar ação:', error);
+            setError(`${error}`); // Define a mensagem de erro
+            setTimeout(() => {
+                closeModal(); // Fecha o modal após o intervalo
+            }, 1000); // Intervalo de 2 segundos
         }
     };
 
@@ -128,6 +134,7 @@ function ComprarPage() {
                         </button>
                         {loading && <div className="spinner"></div>}
                         {success && <div className="success-message">Compra realizada com sucesso!</div>}
+                        {error && <div className="error-message">{error}</div>}
                     </div>
                 </div>
             )}
