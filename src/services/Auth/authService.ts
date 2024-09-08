@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs'; // Certifique-se de usar bcryptjs
-import { User } from '../models/User';
-import { AppDataSource } from '../data-source';
+import { User } from '../../models/User';
+import { AppDataSource } from '../../database/data-source';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1h';

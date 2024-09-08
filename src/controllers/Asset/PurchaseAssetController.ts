@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { CreateAssetService } from '../services/CreateAssetService';
-import { AppDataSource } from '../data-source';
-import { User } from '../models/User';
+import { AppDataSource } from '../../database/data-source';
+import { User } from '../../models/User';
 
 export class PurchaseAssetController {
     async handle(req: Request, res: Response) {

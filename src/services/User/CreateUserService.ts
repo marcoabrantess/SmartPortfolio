@@ -1,5 +1,5 @@
-import { AppDataSource } from "../data-source";
-import { User } from "../models/User";
+import { AppDataSource } from "../../database/data-source";
+import { User } from "../../models/User";
 import { CreatePortfolioService } from "./CreatePortfolioService";
 import bcrypt from 'bcrypt'; // Importa o bcrypt
 

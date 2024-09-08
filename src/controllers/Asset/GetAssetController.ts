@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { GetAssetService } from '../services/GetAssetService';
-import { GetAssetPricesService } from '../services/GetAssetPricesService';
+import { GetAssetPricesService } from '../../services/Asset/GetAssetPricesService';
 
 export class GetAssetController {
     async handle(req: Request, res: Response) {
