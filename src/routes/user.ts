@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import { CreateUserController } from "../controllers/CreateUserController";
-import { GetUserTotalInvestedController } from "../controllers/GetTotalInvestedController";
-import { GetUserAmountController } from "../controllers/GetUserAmountController";
+import { CreateUserController } from "../controllers/User/CreateUserController";
+import { GetUserTotalInvestedController } from "../controllers/Portfolio/GetTotalInvestedController";
+import { GetUserAmountController } from "../controllers/User/GetUserAmountController";
 
 const userRoutes = Router();
 

@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { DepositBalanceController } from "../controllers/DepositBalanceController";
+import { DepositBalanceController } from "../controllers/Portfolio/DepositBalanceController";
 
 const depositRoutes = Router();
 

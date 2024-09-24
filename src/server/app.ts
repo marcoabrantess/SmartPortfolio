@@ -6,7 +6,7 @@ import { userRoutes } from '../routes/user';
 import { authRoutes } from '../routes/auth';
 import { depositRoutes } from '../routes/deposit';
 
-import { AppDataSource } from '../data-source';
+import { AppDataSource } from '../database/data-source';
 
 // Conectar ao banco de dados
 AppDataSource.initialize().then(() => {

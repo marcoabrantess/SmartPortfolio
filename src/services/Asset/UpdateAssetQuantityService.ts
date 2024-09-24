@@ -1,5 +1,5 @@
-import { AppDataSource } from '../data-source';
-import { Asset } from '../models/Asset';
+import { AppDataSource } from '../../database/data-source';
+import { Asset } from '../../models/Asset';
 
 export class GetAssetBySymbolService {
     async updateQuantity(asset: Asset, quantity: number): Promise<void> {

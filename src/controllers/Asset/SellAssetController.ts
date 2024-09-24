@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { RemoveAssetService } from '../services/RemoveAssetService';
+import { RemoveAssetService } from '../../services/Asset/RemoveAssetService';
 
 export class SellAssetController {
     async handle(req: Request, res: Response) {

@@ -1,6 +1,6 @@
-import { AppDataSource } from "../data-source";
-import { User } from "../models/User";
-import { CreatePortfolioService } from "./CreatePortfolioService";
+import { AppDataSource } from "../../database/data-source";
+import { User } from "../../models/User";
+import { CreatePortfolioService } from "../Portfolio/CreatePortfolioService";
 import bcrypt from 'bcrypt'; // Importa o bcrypt
 
 type UserRequest = {

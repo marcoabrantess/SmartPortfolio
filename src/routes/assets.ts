@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import cors from 'cors';
-import { AssetPricerController } from '../controllers/AssetPricerController'
-import { PurchaseAssetController } from '../controllers/PurchaseAssetController';
-import { SellAssetController } from '../controllers/SellAssetController';
-import { GetAssetController } from '../controllers/GetAssetController';
+import { AssetPricerController } from '../controllers/Asset/AssetPricerController'
+import { PurchaseAssetController } from '../controllers/Asset/PurchaseAssetController';
+import { SellAssetController } from '../controllers/Asset/SellAssetController';
+import { GetAssetController } from '../controllers/Asset/GetAssetController';
 
 const stockPriceRoutes = Router();
 

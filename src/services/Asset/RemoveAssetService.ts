@@ -1,6 +1,6 @@
-import { AppDataSource } from '../data-source';
-import { Asset } from '../models/Asset';
-import { User } from '../models/User';
+import { AppDataSource } from '../../database/data-source';
+import { Asset } from '../../models/Asset';
+import { User } from '../../models/User';
 
 interface DeleteAssetParams {
     userId: string;

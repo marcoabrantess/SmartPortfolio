@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { v4 as uuid } from "uuid";
 
 import { Portfolio } from './Portfolio';
-// import { Transaction } from './Transaction';
-
 @Entity('assets')
 export class Asset {
     @PrimaryGeneratedColumn('uuid')

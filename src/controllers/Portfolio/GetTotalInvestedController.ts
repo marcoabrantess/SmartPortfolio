@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { AppDataSource } from '../data-source';
-import { User } from '../models/User';
-import { GetAssetPricesService } from '../services/GetAssetPricesService'; // Ajuste o caminho conforme necessário
+import { AppDataSource } from '../../database/data-source';
+import { User } from '../../models/User';
+import { GetAssetPricesService } from '../../services/Asset/GetAssetPricesService';
 
 export class GetUserTotalInvestedController {
     async handle (req: Request, res: Response) {

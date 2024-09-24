@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ManageBalanceService } from '../services/ManageBalanceService';
+import { ManageBalanceService } from '../../services/User/ManageBalanceService';
 
 export class DepositBalanceController {
     async handle(req: Request, res: Response) {

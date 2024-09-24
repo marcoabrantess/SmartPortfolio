@@ -4,7 +4,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "module": "commonjs",     
-    //"rootDir": "./src",
+    // "rootDir": ".",
     "outDir": "./dir",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -15,6 +15,6 @@
       "*": ["node_modules/*"]
     }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "front-end/**/*.{ts,tsx}", ],
   "exclude": ["node_modules"]
 }
