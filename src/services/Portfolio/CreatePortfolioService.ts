@@ -1,5 +1,5 @@
-import { AppDataSource } from '../data-source';
-import { Portfolio } from '../models/Portfolio';
+import { AppDataSource } from '../../database/data-source';
+import { Portfolio } from '../../models/Portfolio';
 
 
 export class CreatePortfolioService {

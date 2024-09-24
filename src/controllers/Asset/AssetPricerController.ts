@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { GetAssetPricesService } from '../services/Asset/GetAssetPricesService';
+import { GetAssetPricesService } from '../../services/Asset/GetAssetPricesService';
 
 const SYMBOLS = [
     'AAPL', // Apple Inc.

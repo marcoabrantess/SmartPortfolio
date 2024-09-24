@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { GetAssetService } from '../services/GetAssetService';
+import { GetAssetService } from '../../services/Asset/GetAssetService';
 import { GetAssetPricesService } from '../../services/Asset/GetAssetPricesService';
 
 export class GetAssetController {

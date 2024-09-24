@@ -1,5 +1,5 @@
-import { AppDataSource } from '../data-source';
-import { User } from '../models/User';
+import { AppDataSource } from '../../database/data-source';
+import { User } from '../../models/User';
 
 export class ManageBalanceService {
     async addBalance(depositAmount: number, userId: string): Promise<void> {

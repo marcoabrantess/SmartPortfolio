@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CreateAssetService } from '../services/CreateAssetService';
+import { CreateAssetService } from '../../services/Asset/CreateAssetService';
 import { AppDataSource } from '../../database/data-source';
 import { User } from '../../models/User';
 
