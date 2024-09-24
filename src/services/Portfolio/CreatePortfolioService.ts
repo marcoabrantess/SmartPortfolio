@@ -1,16 +1,15 @@
 import { AppDataSource } from '../../database/data-source';
 import { Portfolio } from '../../models/Portfolio';
-
+import { PortfolioFactory } from '../../Factory/PortfolioFactory';
 
 export class CreatePortfolioService {
-    public async execute(): Promise<Portfolio> {
-        const portfoliosRepository = AppDataSource.getRepository(Portfolio);
+  public async execute(): Promise<Portfolio> {
+    const portfoliosRepository = AppDataSource.getRepository(Portfolio);
 
-        // Cria um novo portfólio para o usuário
-        const portfolio = portfoliosRepository.create();
+    const portfolio = PortfolioFactory.create();
 
-        await portfoliosRepository.save(portfolio);
+    await portfoliosRepository.save(portfolio);
 
-        return portfolio;
-    }
+    return portfolio;
+  }
 }
