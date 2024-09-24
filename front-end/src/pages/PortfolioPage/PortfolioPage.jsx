@@ -76,9 +76,9 @@ function PortfolioPage() {
                                 <h2>{acao.name}</h2>
                                 <p>Código: {acao.code}</p>
                                 <p>Quantidade: {acao.quantity}</p>
-                                <p>Preço Médio: R$ {acao.price}</p> {/* Corrigido para usar o preço médio correto */}
-                                <p>Preço Atual: R$ {acao.currentValue}</p> {/* Corrigido para usar o preço atual correto */}
-                                <p>Rendimento: {calculateRendimento(acao).toFixed(2)} % <b>{getRendimentoIcon(acao)}</b></p> {/* Usar cálculo correto aqui */}
+                                <p>Preço Médio: R$ {acao.price}</p>
+                                <p>Preço Atual: R$ {acao.currentValue}</p>
+                                <p>Rendimento: {calculateRendimento(acao).toFixed(2)} % <b>{getRendimentoIcon(acao)}</b></p>
                             </div>
                         ))}
                     </div>
