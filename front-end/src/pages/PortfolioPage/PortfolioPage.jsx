@@ -31,15 +31,19 @@ function PortfolioPage() {
         fetchAcoes();
     }, []);
 
+    const calculateRendimento = (acao) => {
+        return ((acao.currentValue - acao.price) / acao.price) * 100; // Cálculo correto do rendimento
+    };
+
     const getCardClassName = (acao) => {
-        const rendimento = (((acao.price - acao.currentValue) * acao.price) / 100)
+        const rendimento = calculateRendimento(acao);
         if (rendimento > 0) return "card positive";
         if (rendimento < 0) return "card negative";
         return "card neutral";
     };
 
     const getRendimentoIcon = (acao) => {
-        const rendimento = (((acao.price - acao.currentValue) * acao.price) / 100)
+        const rendimento = calculateRendimento(acao);
         if (rendimento > 0) return "▲";
         if (rendimento < 0) return "▼";
         return "=";
@@ -72,9 +76,9 @@ function PortfolioPage() {
                                 <h2>{acao.name}</h2>
                                 <p>Código: {acao.code}</p>
                                 <p>Quantidade: {acao.quantity}</p>
-                                <p>Preço Médio: R$ {acao.currentValue}</p>
-                                <p>Preço Atual: R$ {acao.price}</p>
-                                <p>Rendimento: {(((acao.price - acao.currentValue) * acao.price) / 100).toFixed(2)} % <b>{getRendimentoIcon(acao)}</b></p>
+                                <p>Preço Médio: R$ {acao.price}</p> {/* Corrigido para usar o preço médio correto */}
+                                <p>Preço Atual: R$ {acao.currentValue}</p> {/* Corrigido para usar o preço atual correto */}
+                                <p>Rendimento: {calculateRendimento(acao).toFixed(2)} % <b>{getRendimentoIcon(acao)}</b></p> {/* Usar cálculo correto aqui */}
                             </div>
                         ))}
                     </div>
