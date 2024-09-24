@@ -14,7 +14,6 @@ function VenderPage() {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
-    const [refreshTrigger, setRefreshTrigger] = useState(false); // Adicionado para controle de atualização
 
     const { setUserAmount } = useContext(UserAmountContext);
 
@@ -32,7 +31,7 @@ function VenderPage() {
             }
         }
         fetchAcoes();
-    }, [refreshTrigger]); // Dependência do refreshTrigger
+    }, []); // Dependência do refreshTrigger
 
     const handleSell = (acao) => {
         setSelectedAcao(acao);
