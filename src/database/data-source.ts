@@ -16,12 +16,12 @@ if (!TYPEORM_CONNECTION || !TYPEORM_HOST || !TYPEORM_PORT || !TYPEORM_USERNAME |
 }
 
 export const AppDataSource = new DataSource({
-  type: TYPEORM_CONNECTION as 'postgres', // 'postgres'
+  type: TYPEORM_CONNECTION as 'postgres',
   host: TYPEORM_HOST,
   port: parseInt(TYPEORM_PORT, 10),
   username: TYPEORM_USERNAME,
   password: TYPEORM_PASSWORD,
   database: TYPEORM_DATABASE,
-  entities: [__dirname + '/models/*.ts'], // Ajuste o caminho das entidades
+  entities: [__dirname + '/../models/*.ts'],
   migrations: [TYPEORM_MIGRATIONS],
 });
